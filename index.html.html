@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muhammad Nadeem Sheikh — UAV Systems Specialist</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:          #f0f6fc;
+  --bg-white:    #ffffff;
+  --bg-panel:    #e6f0fa;
+  --border:      #c2d8ef;
+  --border-mid:  #90bcd8;
+  --accent:      #1255a1;
+  --accent-mid:  #2176c7;
+  --accent-light:#ddeeff;
+  --accent-glow: rgba(33,118,199,.35);
+  --sky:         #e8f4fd;
+  --sky-deep:    #b8d8f0;
+  --silver:      #607d8b;
+  --silver-lt:   #b0bec5;
+  --text:        #0b1e30;
+  --text-sec:    #2e4f6b;
+  --text-muted:  #6b90aa;
+  --green:       #2e7d32;
+  --green-bg:    #e8f5e9;
+  --green-bdr:   #a5d6a7;
+  --shadow-sm:   0 2px 8px rgba(18,85,161,0.06);
+  --shadow:      0 4px 20px rgba(18,85,161,0.10), 0 1px 3px rgba(18,85,161,0.05);
+  --shadow-lg:   0 14px 50px rgba(18,85,161,0.16), 0 4px 12px rgba(18,85,161,0.08);
+  --shadow-3d:   0 20px 60px rgba(18,85,161,0.22), 0 8px 20px rgba(18,85,161,0.10), inset 0 1px 0 rgba(255,255,255,0.7);
+  --grid:        rgba(18,85,161,0.055);
+  --glass:       rgba(255,255,255,0.6);
+  --glass-bdr:   rgba(255,255,255,0.8);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:15px;
+  line-height:1.7;
+  overflow-x:hidden;
+  perspective:1200px;
+}
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:54px 54px;
+  pointer-events:none;z-index:0;
+  mask-image:radial-gradient(ellipse at 50% 30%, #000 30%, transparent 80%);
+}
+
+/* Floating background orbs for depth */
+.orb{
+  position:fixed;border-radius:50%;pointer-events:none;z-index:0;
+  filter:blur(60px);opacity:.4;
+}
+.orb-1{width:480px;height:480px;background:radial-gradient(circle,#a5cef0,transparent 70%);top:-150px;left:-150px;animation:float1 20s ease-in-out infinite}
+.orb-2{width:380px;height:380px;background:radial-gradient(circle,#cfe2f8,transparent 70%);top:40%;right:-120px;animation:float2 24s ease-in-out infinite}
+.orb-3{width:300px;height:300px;background:radial-gradient(circle,#dbeafe,transparent 70%);bottom:5%;left:30%;animation:float3 28s ease-in-out infinite}
+@keyframes float1{0%,100%{transform:translate(0,0)}50%{transform:translate(60px,40px)}}
+@keyframes float2{0%,100%{transform:translate(0,0)}50%{transform:translate(-40px,80px)}}
+@keyframes float3{0%,100%{transform:translate(0,0)}50%{transform:translate(40px,-50px)}}
+
+.container{max-width:1120px;margin:0 auto;padding:0 32px;position:relative;z-index:1}
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent)}
+.tag{
+  font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2.5px;
+  text-transform:uppercase;
+  background:linear-gradient(135deg,var(--accent-light),#fff);
+  border:1px solid var(--border);color:var(--accent);
+  padding:5px 12px;border-radius:4px;
+  box-shadow:var(--shadow-sm),inset 0 1px 0 #fff;
+}
+.section-header{display:flex;align-items:center;gap:16px;margin-bottom:48px}
+h2.stitle{font-family:'Rajdhani',sans-serif;font-size:34px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text);text-shadow:0 1px 0 #fff}
+.sline{flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)}
+section{padding:84px 0;position:relative;z-index:1}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes drift{0%{transform:translateX(-4px)}50%{transform:translateX(4px)}100%{transform:translateX(-4px)}}
+@keyframes hover3d{0%,100%{transform:translateY(0) rotateZ(0deg)}50%{transform:translateY(-8px) rotateZ(.5deg)}}
+@keyframes spin-slow{to{transform:rotate(360deg)}}
+@keyframes pulse-glow{0%,100%{box-shadow:0 0 0 0 var(--accent-glow)}50%{box-shadow:0 0 30px 8px var(--accent-glow)}}
+@keyframes scan{0%{top:0}100%{top:100%}}
+@keyframes blink{0%,90%{opacity:.3}95%{opacity:1}100%{opacity:.3}}
+
+/* Reveal on scroll using IntersectionObserver class */
+.reveal{opacity:0;transform:translateY(30px) scale(.98);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:translateY(0) scale(1)}
+
+/* ── NAV ── */
+nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,0.78);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid rgba(194,216,239,0.6);box-shadow:0 4px 30px rgba(18,85,161,0.06)}
+nav .ni{display:flex;align-items:center;justify-content:space-between;padding:14px 32px;max-width:1120px;margin:0 auto}
+.nlogo{font-family:'Rajdhani',sans-serif;font-size:17px;font-weight:700;letter-spacing:3px;color:var(--accent);text-transform:uppercase;display:flex;align-items:center;gap:8px}
+.nlogo::before{content:'';width:8px;height:8px;background:var(--accent);border-radius:50%;box-shadow:0 0 10px var(--accent);animation:blink 2s infinite}
+.nlinks{display:flex;gap:6px;list-style:none}
+.nlinks a{color:var(--silver);text-decoration:none;font-size:11px;font-family:'IBM Plex Mono',monospace;letter-spacing:1.5px;text-transform:uppercase;padding:8px 14px;border-radius:6px;transition:color .2s,background .2s}
+.nlinks a:hover{color:var(--accent);background:var(--accent-light)}
+
+/* ── HERO ── */
+#hero{padding:100px 0 90px;background:linear-gradient(150deg,#cfe5f6 0%,#e0eef9 35%,#eaf2fb 65%,#f0f6fc 100%);border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+#hero::after{content:'';position:absolute;right:-100px;top:-100px;width:700px;height:700px;border-radius:50%;border:1px solid rgba(18,85,161,0.06);pointer-events:none}
+#hero::before{content:'';position:absolute;right:60px;top:40px;width:480px;height:480px;border-radius:50%;border:1px solid rgba(18,85,161,0.04);pointer-events:none}
+
+/* Animated radar lines */
+.radar-bg{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:1200px;height:1200px;pointer-events:none;opacity:.15}
+.radar-bg circle{fill:none;stroke:#1255a1;stroke-width:.5}
+.radar-sweep{transform-origin:center;animation:spin-slow 12s linear infinite}
+
+.hero-inner{display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center;position:relative}
+.hero-hud{width:280px;height:280px;flex-shrink:0;animation:fadeIn 1.2s .6s both;filter:drop-shadow(0 10px 30px rgba(18,85,161,.2))}
+.hero-hud-inner{transform-origin:center;animation:spin-slow 60s linear infinite}
+
+.htag{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:3px;color:var(--accent-mid);text-transform:uppercase;margin-bottom:22px;display:inline-flex;align-items:center;gap:12px;opacity:0;animation:fadeUp .6s .1s forwards;background:rgba(255,255,255,.6);padding:7px 14px;border-radius:30px;border:1px solid rgba(255,255,255,.8);box-shadow:0 2px 10px rgba(18,85,161,.08),inset 0 1px 0 #fff;backdrop-filter:blur(10px)}
+.htag::before{content:'';display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--accent-mid);box-shadow:0 0 8px var(--accent-mid);animation:blink 1.5s infinite}
+
+h1.hname{font-family:'Rajdhani',sans-serif;font-size:clamp(48px,7vw,86px);font-weight:700;line-height:.93;letter-spacing:-1.5px;text-transform:uppercase;color:var(--text);opacity:0;animation:fadeUp .7s .2s forwards;text-shadow:0 2px 0 #fff,0 4px 20px rgba(11,30,48,.08)}
+h1.hname span{background:linear-gradient(135deg,var(--accent) 0%,var(--accent-mid) 60%,#3a8fd9 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;display:block;text-shadow:none;filter:drop-shadow(0 2px 6px rgba(33,118,199,.3))}
+
+.hrole{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--accent-mid);letter-spacing:2px;margin-top:20px;text-transform:uppercase;opacity:0;animation:fadeUp .7s .32s forwards}
+.hsum{max-width:580px;color:var(--text-sec);font-size:15px;margin-top:22px;line-height:1.85;opacity:0;animation:fadeUp .7s .44s forwards}
+
+.hstats{display:inline-flex;flex-wrap:wrap;margin-top:48px;opacity:0;animation:fadeUp .7s .54s forwards;background:linear-gradient(180deg,#fff,#f7fbff);border:1px solid var(--border);border-radius:10px;overflow:hidden;box-shadow:var(--shadow-3d);transform-style:preserve-3d}
+.stat{padding:22px 36px;border-right:1px solid var(--border);text-align:center;position:relative;transition:background .25s}
+.stat:last-child{border-right:none}
+.stat:hover{background:var(--accent-light)}
+.stat::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:30px;height:2px;background:linear-gradient(90deg,transparent,var(--accent-mid),transparent);opacity:0;transition:opacity .25s}
+.stat:hover::before{opacity:1}
+.snum{font-family:'Rajdhani',sans-serif;font-size:44px;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent-mid));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
+.slbl{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.5px;color:var(--text-muted);text-transform:uppercase;margin-top:6px}
+
+.hcontact{display:flex;gap:10px;flex-wrap:wrap;margin-top:36px;opacity:0;animation:fadeUp .7s .64s forwards}
+.ci{display:flex;align-items:center;gap:8px;color:var(--text-sec);font-family:'IBM Plex Mono',monospace;font-size:12px;text-decoration:none;background:linear-gradient(180deg,#fff,#f4f9fd);border:1px solid var(--border);padding:8px 16px;border-radius:6px;transition:all .25s;box-shadow:var(--shadow-sm)}
+.ci:hover{color:var(--accent);border-color:var(--accent-mid);box-shadow:var(--shadow);transform:translateY(-2px)}
+.ci svg{opacity:.65;flex-shrink:0}
+
+/* ── ABOUT STRIP ── */
+#about{padding:48px 0;background:linear-gradient(135deg,var(--accent) 0%,#0d4a8e 50%,var(--accent-mid) 100%);position:relative;z-index:1;overflow:hidden}
+#about::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 25% 50%,rgba(255,255,255,.08) 0%,transparent 50%),radial-gradient(circle at 75% 50%,rgba(255,255,255,.06) 0%,transparent 50%);pointer-events:none}
+.about-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:rgba(255,255,255,.18);position:relative}
+.about-item{padding:30px 32px;background:transparent;transition:background .3s;position:relative}
+.about-item:hover{background:rgba(255,255,255,.08)}
+.about-item::before{content:'';position:absolute;top:0;left:0;width:0;height:2px;background:#fff;transition:width .4s}
+.about-item:hover::before{width:100%}
+.ai-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.65);text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.ai-label::before{content:'';width:5px;height:5px;background:rgba(255,255,255,.6);border-radius:50%}
+.ai-val{font-family:'Rajdhani',sans-serif;font-size:18px;font-weight:600;color:#fff;line-height:1.3}
+
+/* ── TIMELINE ── */
+.timeline{position:relative}
+.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--accent),var(--accent-mid) 30%,var(--border));border-radius:2px;box-shadow:0 0 10px rgba(33,118,199,.3)}
+.job{padding-left:42px;padding-bottom:56px;position:relative}
+.job::before{content:'';position:absolute;left:-7px;top:8px;width:16px;height:16px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#fff 0%,var(--accent) 60%);border:3px solid var(--bg);box-shadow:0 0 0 2px var(--accent-mid),0 0 16px var(--accent-glow)}
+.job::after{content:'';position:absolute;left:-3px;top:14px;width:6px;height:6px;border-radius:50%;background:#fff;opacity:.8}
+
+.jcard{background:linear-gradient(180deg,#fff,#fafcff);border:1px solid var(--border);border-radius:10px;padding:24px 28px;box-shadow:var(--shadow);transition:transform .3s,box-shadow .3s;transform-style:preserve-3d}
+.jcard:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+
+.jmeta{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:5px}
+.jco{font-family:'Rajdhani',sans-serif;font-size:21px;font-weight:700;color:var(--text)}
+.jperiod{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:1px;background:linear-gradient(135deg,var(--accent-light),#fff);border:1px solid var(--border);padding:4px 12px;border-radius:4px;white-space:nowrap;box-shadow:inset 0 1px 0 #fff}
+.jrole{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--accent-mid);letter-spacing:.5px;margin-bottom:14px}
+.jloc{color:var(--text-muted);font-size:11px;margin-left:8px}
+.jdesc{color:var(--text-sec);font-size:14px;line-height:1.85;margin-bottom:14px}
+.secondment{background:linear-gradient(180deg,var(--green-bg),#f1faf2);border:1px solid var(--green-bdr);border-left:4px solid var(--green);padding:16px 20px;margin-top:14px;border-radius:0 6px 6px 0;box-shadow:0 2px 8px rgba(46,125,50,.08)}
+.slabel{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--green);text-transform:uppercase;margin-bottom:6px;font-weight:500}
+.secondment p{color:#2a4a2a;font-size:13px}
+.ptags{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.ptag{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent);background:linear-gradient(135deg,var(--accent-light),#fff);border:1px solid var(--border);padding:5px 13px;border-radius:4px;transition:all .2s;cursor:default;box-shadow:inset 0 1px 0 #fff}
+.ptag:hover{background:linear-gradient(135deg,#cce3f8,var(--accent-light));border-color:var(--accent-mid);transform:translateY(-1px);box-shadow:0 4px 10px rgba(33,118,199,.15)}
+
+/* ── PLATFORMS ── */
+#platforms{background:linear-gradient(180deg,var(--bg-panel),#dde9f5);border-top:1px solid var(--border);border-bottom:1px solid var(--border);position:relative}
+#platforms::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 20% 0%,rgba(33,118,199,.08),transparent 50%),radial-gradient(circle at 80% 100%,rgba(33,118,199,.08),transparent 50%);pointer-events:none}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px;position:relative}
+.pcard{background:linear-gradient(180deg,#fff,#fafcff);border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:var(--shadow);transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s,border-color .35s;transform-style:preserve-3d;position:relative}
+.pcard:hover{transform:translateY(-6px) rotateX(2deg);box-shadow:var(--shadow-3d);border-color:var(--accent-mid)}
+.pcard::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--accent-mid),var(--accent),var(--accent-mid),transparent);opacity:0;transition:opacity .35s;z-index:2}
+.pcard:hover::before{opacity:1}
+.pcard:hover .uav-art{animation:hover3d 4s ease-in-out infinite}
+.pcard:hover .pillu::after{opacity:1}
+
+.pillu{width:100%;height:210px;display:block;border-bottom:1px solid var(--border);background:linear-gradient(180deg,#bedaf0 0%,#d4eaf9 30%,#e8f4fd 65%,#f0f6fc 100%);position:relative;overflow:hidden;perspective:600px}
+.pillu::before{content:'';position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,#fff,transparent);opacity:.6;z-index:2}
+.pillu::after{content:'';position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(33,118,199,.5),transparent);opacity:0;animation:scan 4s linear infinite;transition:opacity .35s;z-index:3}
+.pillu svg{width:100%;height:100%;filter:drop-shadow(0 4px 8px rgba(11,30,48,.18))}
+.pbody{padding:22px 24px;position:relative}
+.porg{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--accent-mid);text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.porg::before{content:'';width:4px;height:4px;background:var(--accent-mid);border-radius:50%}
+.pname{font-family:'Rajdhani',sans-serif;font-size:24px;font-weight:700;color:var(--text);margin-bottom:4px;letter-spacing:.3px}
+.ptype{font-size:11px;color:var(--text-muted);font-family:'IBM Plex Mono',monospace;margin-bottom:12px;letter-spacing:.5px}
+.pdesc{font-size:13px;color:var(--text-sec);line-height:1.7}
+.pbadge{display:inline-block;margin-top:14px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;background:linear-gradient(135deg,var(--accent-light),#fff);border:1px solid var(--border);color:var(--accent);padding:4px 11px;border-radius:4px;box-shadow:inset 0 1px 0 #fff}
+
+/* ── SKILLS ── */
+.sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:22px}
+.scard{background:linear-gradient(180deg,#fff,#fafcff);border:1px solid var(--border);padding:28px 30px;border-radius:10px;box-shadow:var(--shadow);transition:all .35s;position:relative;overflow:hidden}
+.scard::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,rgba(33,118,199,.04) 0%,transparent 50%);opacity:0;transition:opacity .35s;pointer-events:none}
+.scard:hover{border-color:var(--accent-mid);transform:translateY(-4px);box-shadow:var(--shadow-3d)}
+.scard:hover::before{opacity:1}
+.scard:hover .sicon{transform:scale(1.05) rotate(-3deg);box-shadow:0 6px 18px rgba(33,118,199,.25)}
+.sicon{width:48px;height:48px;background:linear-gradient(135deg,var(--accent-light),#fff);border:1px solid var(--border);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;color:var(--accent);box-shadow:var(--shadow-sm),inset 0 1px 0 #fff;transition:transform .35s,box-shadow .35s}
+.stitle2{font-family:'Rajdhani',sans-serif;font-size:19px;font-weight:700;color:var(--text);margin-bottom:14px;letter-spacing:.3px}
+.sitems{list-style:none}
+.sitems li{font-size:13px;color:var(--text-sec);padding:6px 0;border-bottom:1px solid var(--bg-panel);display:flex;align-items:center;gap:10px;transition:color .2s,padding-left .2s}
+.sitems li:last-child{border-bottom:none}
+.sitems li:hover{color:var(--accent);padding-left:4px}
+.sitems li::before{content:'›';color:var(--accent-mid);font-size:18px;line-height:1;flex-shrink:0;font-weight:700}
+
+/* ── CERTS ── */
+#certifications{background:linear-gradient(180deg,#dde9f5,var(--bg-panel));border-top:1px solid var(--border);border-bottom:1px solid var(--border);position:relative}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin-bottom:32px}
+.ccard{background:linear-gradient(180deg,#fff,#fafcff);border:1px solid var(--border);padding:20px 24px;border-radius:8px;box-shadow:var(--shadow);transition:all .3s;position:relative;overflow:hidden}
+.ccard::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 60%,rgba(33,118,199,.06));opacity:0;transition:opacity .3s;pointer-events:none}
+.ccard:hover{border-color:var(--accent-mid);transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+.ccard:hover::after{opacity:1}
+.ccard.key{border-color:var(--accent-mid);background:linear-gradient(135deg,#eef6ff,#fff);box-shadow:0 6px 24px rgba(33,118,199,.14),inset 0 1px 0 #fff}
+.ccard.key::before{content:'★ KEY';position:absolute;top:12px;right:14px;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:1.5px;color:var(--accent);background:linear-gradient(135deg,var(--accent-light),#fff);border:1px solid var(--accent-mid);padding:3px 8px;border-radius:4px;font-weight:600}
+.corg{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--accent-mid);text-transform:uppercase;margin-bottom:7px}
+.cname{font-family:'Rajdhani',sans-serif;font-size:18px;font-weight:600;color:var(--text);line-height:1.3}
+.cbig{display:inline-flex;align-items:center;gap:24px;background:linear-gradient(135deg,#fff,#f4faff);border:1px solid var(--border);box-shadow:var(--shadow-3d);padding:22px 36px;border-radius:10px;position:relative;overflow:hidden}
+.cbig::before{content:'';position:absolute;top:-50%;right:-30%;width:200px;height:200px;background:radial-gradient(circle,var(--accent-glow),transparent 70%);pointer-events:none}
+.cbig .num{font-family:'Rajdhani',sans-serif;font-size:64px;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent-mid));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;line-height:1;position:relative;z-index:1}
+.cbig .lbl{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text-muted);letter-spacing:1px;text-transform:uppercase;line-height:1.6;position:relative;z-index:1}
+
+/* ── EDUCATION ── */
+.educard{background:linear-gradient(180deg,#fff,#fafcff);border:1px solid var(--border);border-left:5px solid var(--accent);padding:32px 36px;display:flex;align-items:flex-start;gap:28px;border-radius:0 10px 10px 0;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.educard::before{content:'';position:absolute;top:0;right:0;width:200px;height:200px;background:radial-gradient(circle,var(--accent-light),transparent 60%);opacity:.5;pointer-events:none}
+.eduicon{width:56px;height:56px;background:linear-gradient(135deg,var(--accent-light),#fff);border:1px solid var(--border);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--accent);flex-shrink:0;box-shadow:var(--shadow-sm),inset 0 1px 0 #fff;position:relative;z-index:1}
+.edudeg{font-family:'Rajdhani',sans-serif;font-size:24px;font-weight:700;color:var(--text);margin-bottom:5px;position:relative;z-index:1}
+.eduspec{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--accent-mid);letter-spacing:1px;margin-bottom:8px;position:relative;z-index:1}
+.eduinst{font-size:14px;color:var(--text-sec);margin-bottom:5px;position:relative;z-index:1}
+.eduyear{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:1px;position:relative;z-index:1}
+
+/* ── CONTACT ── */
+#contact{background:linear-gradient(135deg,var(--accent) 0%,#0d4a8e 50%,#1a6bc1 100%);padding:84px 0;position:relative;overflow:hidden}
+#contact::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 20% 30%,rgba(255,255,255,.1),transparent 40%),radial-gradient(circle at 80% 70%,rgba(255,255,255,.08),transparent 40%);pointer-events:none}
+.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;position:relative;z-index:1}
+.contact-left h2{font-family:'Rajdhani',sans-serif;font-size:46px;font-weight:700;color:#fff;text-transform:uppercase;line-height:1.05;margin-bottom:18px;text-shadow:0 2px 20px rgba(0,0,0,.15)}
+.contact-left p{color:rgba(255,255,255,.78);font-size:15px;line-height:1.85}
+.contact-items{display:flex;flex-direction:column;gap:16px}
+.citem{display:flex;align-items:center;gap:18px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);padding:18px 22px;border-radius:10px;text-decoration:none;transition:all .3s;backdrop-filter:blur(10px);box-shadow:0 4px 20px rgba(0,0,0,.1)}
+.citem:hover{background:rgba(255,255,255,.16);transform:translateX(6px) translateY(-2px);border-color:rgba(255,255,255,.3);box-shadow:0 8px 30px rgba(0,0,0,.15)}
+.citem-icon{width:44px;height:44px;background:rgba(255,255,255,.18);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;flex-shrink:0;box-shadow:inset 0 1px 0 rgba(255,255,255,.3)}
+.citem-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.6);text-transform:uppercase;margin-bottom:3px}
+.citem-val{font-size:14px;color:#fff;font-weight:500}
+
+/* ── FOOTER ── */
+footer{background:linear-gradient(180deg,#071929,#040f1a);padding:40px 0;position:relative}
+footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent-mid),transparent);opacity:.4}
+.fi{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;max-width:1120px;margin:0 auto;padding:0 32px}
+.flogo{font-family:'Rajdhani',sans-serif;font-size:20px;font-weight:700;letter-spacing:2px;color:#fff;text-transform:uppercase}
+.fcopy{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#4a6a88;letter-spacing:1px}
+.flinks{display:flex;gap:18px}
+.flinks a{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7a9ab5;text-decoration:none;transition:color .2s;letter-spacing:1px;text-transform:uppercase}
+.flinks a:hover{color:#fff}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr}.hero-hud{display:none}
+  .contact-wrap{grid-template-columns:1fr;gap:32px}
+  .radar-bg{display:none}
+}
+@media(max-width:680px){
+  .nlinks{display:none}
+  .hstats{display:flex;flex-direction:column}
+  .stat{border-right:none;border-bottom:1px solid var(--border)}
+  .stat:last-child{border-bottom:none}
+  h1.hname{font-size:50px}
+  .educard{flex-direction:column;gap:20px}
+  .container{padding:0 18px}
+  .orb{display:none}
+}
+@media print{
+  *{animation:none!important;opacity:1!important;transform:none!important}
+  nav{position:static}
+  .orb,.radar-bg{display:none}
+  #about,#contact{background:#1255a1}
+  footer{background:#071929}
+}
+</style>
+</head>
+<body>
+
+<!-- Floating background orbs -->
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<nav>
+  <div class="ni">
+    <div class="nlogo">MNS · UAV</div>
+    <ul class="nlinks">
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#platforms">Platforms</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#certifications">Certs</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section id="hero">
+  <!-- Animated radar background -->
+  <svg class="radar-bg" viewBox="0 0 1200 1200">
+    <circle cx="600" cy="600" r="100"/>
+    <circle cx="600" cy="600" r="220"/>
+    <circle cx="600" cy="600" r="360"/>
+    <circle cx="600" cy="600" r="500"/>
+    <line x1="0" y1="600" x2="1200" y2="600" stroke="#1255a1" stroke-width=".3" opacity=".4"/>
+    <line x1="600" y1="0" x2="600" y2="1200" stroke="#1255a1" stroke-width=".3" opacity=".4"/>
+    <g class="radar-sweep">
+      <path d="M600,600 L600,100 A500,500 0 0,1 1080,800 Z" fill="url(#sweepGrad)" opacity=".3"/>
+    </g>
+    <defs>
+      <linearGradient id="sweepGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#2176c7" stop-opacity="0"/>
+        <stop offset="100%" stop-color="#2176c7" stop-opacity=".4"/>
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <div class="container">
+    <div class="hero-inner">
+      <div>
+        <div class="htag">UAV Systems Specialist — Pioneer of Pakistani UAV Manufacturing</div>
+        <h1 class="hname">Muhammad<br>Nadeem<br><span>Sheikh</span></h1>
+        <div class="hrole">Lead Technician · Test Pilot · Operations Manager</div>
+        <p class="hsum">26 years at the forefront of unmanned aviation — from building Pakistan's first indigenous UAV platforms at SATUMA, to instructing Joint Forces of Oman, to leading programmes at PSDSARC Riyadh and SAMI. A career defined by precision, service, and airborne excellence.</p>
+        <div class="hstats">
+          <div class="stat"><div class="snum">26</div><div class="slbl">Years Experience</div></div>
+          <div class="stat"><div class="snum">65+</div><div class="slbl">FAA Certifications</div></div>
+          <div class="stat"><div class="snum">12+</div><div class="slbl">UAV Platforms</div></div>
+          <div class="stat"><div class="snum">4</div><div class="slbl">Countries Served</div></div>
+        </div>
+        <div class="hcontact">
+          <a class="ci" href="tel:+966539199248">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg>
+            +966 53 919 9248
+          </a>
+          <a class="ci" href="mailto:nadeem.sheikh101980@gmail.com">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            nadeem.sheikh101980@gmail.com
+          </a>
+          <span class="ci">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Riyadh, Saudi Arabia
+          </span>
+        </div>
+      </div>
+      <svg class="hero-hud" viewBox="0 0 280 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g class="hero-hud-inner" style="transform-origin:140px 140px">
+          <circle cx="140" cy="140" r="135" stroke="#1255a1" stroke-width=".6" stroke-dasharray="4 8" opacity=".5"/>
+          <circle cx="140" cy="140" r="100" stroke="#1255a1" stroke-width=".6" stroke-dasharray="2 5" opacity=".5"/>
+          <circle cx="140" cy="140" r="65"  stroke="#2176c7" stroke-width=".6" opacity=".6"/>
+          <!-- ticks -->
+          <g stroke="#1255a1" stroke-width="1" opacity=".5">
+            <line x1="140" y1="5" x2="140" y2="15"/>
+            <line x1="140" y1="265" x2="140" y2="275"/>
+            <line x1="5" y1="140" x2="15" y2="140"/>
+            <line x1="265" y1="140" x2="275" y2="140"/>
+          </g>
+        </g>
+        <circle cx="140" cy="140" r="6" fill="#1255a1"/>
+        <circle cx="140" cy="140" r="14" stroke="#1255a1" stroke-width="1" fill="none" opacity=".5"/>
+        <line x1="140" y1="20" x2="140" y2="50" stroke="#1255a1" stroke-width=".7"/>
+        <line x1="140" y1="230" x2="140" y2="260" stroke="#1255a1" stroke-width=".7"/>
+        <line x1="20" y1="140" x2="50" y2="140" stroke="#1255a1" stroke-width=".7"/>
+        <line x1="230" y1="140" x2="260" y2="140" stroke="#1255a1" stroke-width=".7"/>
+        <path d="M30 30 L30 54 L54 54" stroke="#1255a1" stroke-width="1.5" fill="none"/>
+        <path d="M250 30 L250 54 L226 54" stroke="#1255a1" stroke-width="1.5" fill="none"/>
+        <path d="M30 250 L30 226 L54 226" stroke="#1255a1" stroke-width="1.5" fill="none"/>
+        <path d="M250 250 L250 226 L226 226" stroke="#1255a1" stroke-width="1.5" fill="none"/>
+        <text x="148" y="132" font-family="monospace" font-size="7" fill="#1255a1" opacity=".75">24.7°N</text>
+        <text x="148" y="142" font-family="monospace" font-size="7" fill="#1255a1" opacity=".75">46.7°E</text>
+        <text x="148" y="152" font-family="monospace" font-size="7" fill="#2176c7" opacity=".95">RIYADH</text>
+        <text x="148" y="162" font-family="monospace" font-size="6" fill="#2176c7" opacity=".7">ALT 1200m</text>
+        <!-- aircraft icon at center upper -->
+        <g transform="translate(140,80) scale(.5)" fill="#1255a1" opacity=".7">
+          <path d="M0,-12 L4,0 L20,2 L20,5 L4,4 L2,18 L6,20 L6,22 L-6,22 L-6,20 L-2,18 L-4,4 L-20,5 L-20,2 L-4,0 Z"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-item"><div class="ai-label">Current Position</div><div class="ai-val">Lead Technician & UAV Test Pilot · SAMI, Riyadh</div></div>
+      <div class="about-item"><div class="ai-label">Specialisation</div><div class="ai-val">Fixed-Wing UAV Mechanical Systems & Flight Operations</div></div>
+      <div class="about-item"><div class="ai-label">Career Start</div><div class="ai-val">March 2000 · SATUMA Pakistan (Founding Team)</div></div>
+      <div class="about-item"><div class="ai-label">International Deployments</div><div class="ai-val">Pakistan · Saudi Arabia · Oman</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="tag">01</span>
+      <h2 class="stitle">Career Timeline</h2>
+      <div class="sline"></div>
+    </div>
+    <div class="timeline">
+
+      <div class="job reveal">
+        <div class="jcard">
+          <div class="jmeta">
+            <div><div class="jco">SAMI — Saudi Arabian Military Industries</div><div class="jrole">Lead Technician Mechanical / UAV Test Pilot <span class="jloc">· Riyadh, KSA</span></div></div>
+            <div class="jperiod">Dec 2023 — Present</div>
+          </div>
+          <p class="jdesc">Serving as Lead Technician and UAV Test Pilot at one of Saudi Arabia's foremost defence manufacturers. Responsible for mechanical systems integration, pre/post-flight inspections, airworthiness verification, and test flights across operational UAV programmes supporting KSA national defence objectives.</p>
+        </div>
+      </div>
+
+      <div class="job reveal">
+        <div class="jcard">
+          <div class="jmeta">
+            <div><div class="jco">ADREK LLC</div><div class="jrole">Manager Operations <span class="jloc">· Saudi Arabia</span></div></div>
+            <div class="jperiod">Mar 2023 — Dec 2023</div>
+          </div>
+          <p class="jdesc">Led day-to-day operational management of UAV activities — logistics, maintenance scheduling, personnel coordination, and client liaison. Ensured full compliance with airspace regulations and mission readiness standards.</p>
+        </div>
+      </div>
+
+      <div class="job reveal">
+        <div class="jcard">
+          <div class="jmeta">
+            <div><div class="jco">WOOT Tech</div><div class="jrole">Senior UAV Pilot <span class="jloc">· Pakistan</span></div></div>
+            <div class="jperiod">Apr 2022 — Feb 2023</div>
+          </div>
+          <p class="jdesc">Senior pilot overseeing commercial and survey UAV operations, mentoring junior pilots, and maintaining safety protocols and flight documentation standards.</p>
+        </div>
+      </div>
+
+      <div class="job reveal">
+        <div class="jcard">
+          <div class="jmeta">
+            <div><div class="jco">SATUMA — State Advanced Technology UAV Manufacturing</div><div class="jrole">Lead Technician Mechanical / UAV <span class="jloc">· Pakistan</span></div></div>
+            <div class="jperiod">2016 — Feb 2022</div>
+          </div>
+          <p class="jdesc">Returned to SATUMA as Lead Technician, overseeing mechanical assembly, systems integration, and QA across multiple fixed-wing UAV platforms for the Pakistan Air Force. Led cross-functional technical teams and contributed to platform development and testing.</p>
+          <div class="ptags"><span class="ptag">Sky Guard</span><span class="ptag">Jasoos II</span><span class="ptag">Flamingo</span><span class="ptag">Thunder</span></div>
+          <div class="secondment">
+            <div class="slabel">🛡 International Secondment — May 2019 to Feb 2022</div>
+            <p>Seconded to <strong>PSDSARC, Riyadh, Saudi Arabia</strong> to support the <strong>Sky Guard UAV programme</strong>. Delivered advanced mechanical maintenance and operational expertise in a high-security multinational defence environment.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="job reveal">
+        <div class="jcard">
+          <div class="jmeta">
+            <div><div class="jco">Engineering Systems Pakistan (ESP)</div><div class="jrole">Lead Technician UAV / Test Pilot <span class="jloc">· Pakistan</span></div></div>
+            <div class="jperiod">Oct 2010 — May 2016</div>
+          </div>
+          <p class="jdesc">Lead Technician and qualified Test Pilot across ESP's fixed-wing UAV portfolio. Conducted airworthiness evaluations, systems checks, and operational test flights, while mentoring technical staff and maintaining detailed flight records.</p>
+          <div class="ptags"><span class="ptag">Optimus</span><span class="ptag">Hud Hud (Oman)</span><span class="ptag">Atarid Target Drone (Oman)</span></div>
+          <div class="secondment">
+            <div class="slabel">🌍 International Deputation — 2015 to 2016</div>
+            <p>Deputed to the <strong>Sultanate of Oman</strong> as <strong>Mechanical Instructor</strong> to the <strong>Joint Forces of Oman</strong>. Delivered structured technical training on the Hud Hud reconnaissance UAV and Atarid aerial target drone.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="job reveal">
+        <div class="jcard">
+          <div class="jmeta">
+            <div><div class="jco">SATUMA — State Advanced Technology UAV Manufacturing</div><div class="jrole">Lead Technician Mechanical / UAV <span class="jloc">· Pakistan (Founding Team)</span></div></div>
+            <div class="jperiod">Mar 2000 — Oct 2010</div>
+          </div>
+          <p class="jdesc">Founding technical specialist at SATUMA — Pakistan's first indigenous UAV manufacturer. Pioneered design, fabrication, assembly, integration, and testing of multiple UAV platforms for the Pakistan Air Force. Built institutional expertise in composite structures, powerplant systems, avionics integration, and GCS operations from the ground up.</p>
+          <div class="ptags">
+            <span class="ptag">Jasoos II</span><span class="ptag">Bravo+</span><span class="ptag">Flamingo</span><span class="ptag">Border Eagle</span><span class="ptag">Salar</span><span class="ptag">Salar X</span><span class="ptag">Thunder</span><span class="ptag">HST Trainer</span><span class="ptag">FST Trainer</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="platforms">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="tag">02</span>
+      <h2 class="stitle">UAV Platforms Worked On</h2>
+      <div class="sline"></div>
+    </div>
+    <div class="pgrid">
+
+      <!-- JASOOS II — Twin-boom -->
+      <div class="pcard reveal">
+        <div class="pillu">
+          <svg viewBox="0 0 400 210" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="metal1" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#3a8fd9"/>
+                <stop offset="50%" stop-color="#1255a1"/>
+                <stop offset="100%" stop-color="#0d3a6e"/>
+              </linearGradient>
+              <linearGradient id="metal1b" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#0d2137"/>
+                <stop offset="100%" stop-color="#040d18"/>
+              </linearGradient>
+              <radialGradient id="cockpit1"><stop offset="0%" stop-color="#fff" stop-opacity=".9"/><stop offset="100%" stop-color="#2176c7" stop-opacity=".4"/></radialGradient>
+            </defs>
+            <ellipse cx="60" cy="40" rx="35" ry="6" fill="#fff" opacity=".6"/>
+            <ellipse cx="320" cy="55" rx="40" ry="7" fill="#fff" opacity=".5"/>
+            <ellipse cx="200" cy="190" rx="80" ry="6" fill="#0b1e30" opacity=".15"/>
+            <line x1="0" y1="160" x2="400" y2="160" stroke="#90bcd8" stroke-width=".5" stroke-dasharray="2 4" opacity=".5"/>
+            <g class="uav-art" transform="translate(200,100)">
+              <ellipse cx="0" cy="0" rx="120" ry="6" fill="url(#metal1)"/>
+              <ellipse cx="0" cy="-2" rx="120" ry="2" fill="#5fa9e3" opacity=".7"/>
+              <ellipse cx="0" cy="0" rx="32" ry="9" fill="url(#metal1b)"/>
+              <ellipse cx="22" cy="-2" rx="6" ry="3" fill="url(#cockpit1)"/>
+              <rect x="-50" y="3" width="55" height="2.5" fill="url(#metal1)"/>
+              <rect x="-50" y="-5.5" width="55" height="2.5" fill="url(#metal1)"/>
+              <path d="M-50 3 L-58 -8 L-46 -8 L-46 3 Z" fill="url(#metal1)"/>
+              <path d="M-50 -5 L-58 -16 L-46 -16 L-46 -5 Z" fill="#2176c7"/>
+              <rect x="-58" y="-12" width="14" height="2" fill="#0b1e30"/>
+              <line x1="33" y1="-9" x2="33" y2="9" stroke="#0b1e30" stroke-width="1.5" opacity=".7"/>
+              <ellipse cx="33" cy="0" rx="2" ry="10" fill="#0b1e30" opacity=".3"/>
+            </g>
+            <path d="M40 175 Q 200 168 360 175" stroke="#1255a1" stroke-width="0.7" stroke-dasharray="3 3" fill="none" opacity=".4"/>
+          </svg>
+        </div>
+        <div class="pbody">
+          <div class="porg">SATUMA · Pakistan Air Force</div>
+          <div class="pname">Jasoos II</div>
+          <div class="ptype">Short-Range Reconnaissance UAV</div>
+          <div class="pdesc">Indigenous ISR platform built for PAF tactical operations. One of Pakistan's first domestically manufactured surveillance drones, from SATUMA's founding team.</div>
+          <span class="pbadge">Mar 2000 — 2022</span>
+        </div>
+      </div>
+
+      <!-- FLAMINGO — MALE -->
+      <div class="pcard reveal">
+        <div class="pillu">
+          <svg viewBox="0 0 400 210" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="metal2" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#3a8fd9"/>
+                <stop offset="60%" stop-color="#1255a1"/>
+                <stop offset="100%" stop-color="#0d3a6e"/>
+              </linearGradient>
+            </defs>
+            <ellipse cx="80" cy="35" rx="42" ry="6" fill="#fff" opacity=".6"/>
+            <ellipse cx="310" cy="48" rx="35" ry="6" fill="#fff" opacity=".5"/>
+            <ellipse cx="200" cy="190" rx="100" ry="6" fill="#0b1e30" opacity=".15"/>
+            <line x1="0" y1="160" x2="400" y2="160" stroke="#90bcd8" stroke-width=".5" stroke-dasharray="2 4" opacity=".5"/>
+            <g class="uav-art" transform="translate(200,95)">
+              <path d="M-160 0 Q -80 -3 0 -2 Q 80 -3 160 0 L 160 4 Q 80 6 0 5 Q -80 6 -160 4 Z" fill="url(#metal2)"/>
+              <path d="M-160 -1 Q 0 -4 160 -1 L 160 .5 Q 0 -2.5 -160 .5 Z" fill="#5fa9e3" opacity=".7"/>
+              <ellipse cx="0" cy="2" rx="38" ry="10" fill="#0b1e30"/>
+              <ellipse cx="22" cy="0" rx="14" ry="4" fill="#5fa9e3" opacity=".75"/>
+              <ellipse cx="22" cy="-1" rx="10" ry="2" fill="#fff" opacity=".5"/>
+              <path d="M-38 2 L-52 -4 L-52 8 Z" fill="url(#metal2)"/>
+              <path d="M-38 2 L-46 -10 L-40 -10 L-30 2 Z" fill="#0b1e30"/>
+              <line x1="36" y1="-9" x2="36" y2="13" stroke="#0b1e30" stroke-width="1.5" opacity=".7"/>
+              <ellipse cx="36" cy="2" rx="2" ry="12" fill="#0b1e30" opacity=".3"/>
+              <circle cx="-5" cy="13" r="5" fill="#0b1e30"/>
+              <circle cx="-5" cy="13" r="2.5" fill="#2176c7"/>
+              <circle cx="-4" cy="12" r="1" fill="#fff" opacity=".7"/>
+            </g>
+            <path d="M40 175 Q 200 168 360 175" stroke="#1255a1" stroke-width="0.7" stroke-dasharray="3 3" fill="none" opacity=".4"/>
+          </svg>
+        </div>
+        <div class="pbody">
+          <div class="porg">SATUMA · Pakistan Air Force</div>
+          <div class="pname">Flamingo</div>
+          <div class="ptype">MALE UAV — Medium Altitude Long Endurance</div>
+          <div class="pdesc">Extended-endurance platform for area surveillance and reconnaissance. Capable of sustained operations over large theatres of operation.</div>
+          <span class="pbadge">Mar 2000 — 2022</span>
+        </div>
+      </div>
+
+      <!-- THUNDER — Jet target -->
+      <div class="pcard reveal">
+        <div class="pillu">
+          <svg viewBox="0 0 400 210" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="metal3" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#4a90d9"/>
+                <stop offset="60%" stop-color="#1255a1"/>
+                <stop offset="100%" stop-color="#0a2a52"/>
+              </linearGradient>
+              <radialGradient id="flame"><stop offset="0%" stop-color="#fff"/><stop offset="40%" stop-color="#ffeb3b"/><stop offset="100%" stop-color="#ff6b35" stop-opacity="0"/></radialGradient>
+            </defs>
+            <ellipse cx="60" cy="42" rx="35" ry="6" fill="#fff" opacity=".6"/>
+            <ellipse cx="320" cy="55" rx="40" ry="7" fill="#fff" opacity=".5"/>
+            <ellipse cx="220" cy="190" rx="90" ry="6" fill="#0b1e30" opacity=".15"/>
+            <line x1="0" y1="160" x2="400" y2="160" stroke="#90bcd8" stroke-width=".5" stroke-dasharray="2 4" opacity=".5"/>
+            <line x1="50" y1="100" x2="100" y2="100" stroke="#2176c7" stroke-width="1.2" opacity=".5"/>
+            <line x1="40" y1="110" x2="80"  y2="110" stroke="#2176c7" stroke-width="1" opacity=".4"/>
+            <line x1="55" y1="90"  x2="85"  y2="90"  stroke="#2176c7" stroke-width=".8" opacity=".3"/>
+            <g class="uav-art" transform="translate(220,100)">
+              <path d="M-90 0 Q -85 -8 -50 -7 L 60 -6 Q 85 -5 95 0 Q 85 5 60 6 L -50 7 Q -85 8 -90 0 Z" fill="url(#metal3)"/>
+              <path d="M-90 0 Q -85 -7 -50 -6 L 60 -5 Q 80 -4 92 0" stroke="#5fa9e3" stroke-width="1" fill="none" opacity=".6"/>
+              <path d="M95 0 L 110 0 L 95 4 Z" fill="#0b1e30"/>
+              <path d="M95 0 L 110 0 L 95 -4 Z" fill="#0b1e30"/>
+              <path d="M-15 -2 L 35 -2 L 25 -22 L -5 -16 Z" fill="url(#metal3)"/>
+              <path d="M-15 2  L 35 2  L 25  22 L -5  16 Z" fill="url(#metal3)"/>
+              <path d="M-50 -6 L -65 -22 L -45 -22 L -38 -6 Z" fill="#0b1e30"/>
+              <ellipse cx="-105" cy="0" rx="20" ry="3" fill="url(#flame)" opacity=".7"/>
+              <circle cx="-90" cy="0" r="6" fill="#ff9900" opacity=".8"/>
+              <circle cx="-90" cy="0" r="3" fill="#ffeb3b"/>
+            </g>
+            <path d="M40 175 Q 200 168 360 175" stroke="#1255a1" stroke-width="0.7" stroke-dasharray="3 3" fill="none" opacity=".4"/>
+          </svg>
+        </div>
+        <div class="pbody">
+          <div class="porg">SATUMA · Pakistan Air Force</div>
+          <div class="pname">Thunder</div>
+          <div class="ptype">High-Speed Aerial Target Drone</div>
+          <div class="pdesc">High-performance aerial target drone used to train PAF air defence and missile crews against realistic threat profiles at speed.</div>
+          <span class="pbadge">Mar 2000 — 2022</span>
+        </div>
+      </div>
+
+      <!-- BORDER EAGLE -->
+      <div class="pcard reveal">
+        <div class="pillu">
+          <svg viewBox="0 0 400 210" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="metal4" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#3a8fd9"/>
+                <stop offset="60%" stop-color="#1255a1"/>
+                <stop offset="100%" stop-color="#0d3a6e"/>
+              </linearGradient>
+            </defs>
+            <ellipse cx="70" cy="38" rx="38" ry="6" fill="#fff" opacity=".6"/>
+            <ellipse cx="330" cy="50" rx="36" ry="6" fill="#fff" opacity=".5"/>
+            <path d="M0 165 L60 145 L100 155 L150 138 L200 150 L250 140 L300 152 L360 142 L400 158 L400 210 L0 210 Z" fill="#7a9ab5" opacity=".5"/>
+            <path d="M0 175 L60 158 L100 165 L150 148 L200 158 L250 152 L300 162 L360 152 L400 167 L400 210 L0 210 Z" fill="#5d7e9a" opacity=".4"/>
+            <line x1="0" y1="170" x2="400" y2="170" stroke="#90bcd8" stroke-width=".5" stroke-dasharray="2 4" opacity=".4"/>
+            <g class="uav-art" transform="translate(200,90)">
+              <ellipse cx="0" cy="-3" rx="110" ry="5" fill="url(#metal4)"/>
+              <ellipse cx="0" cy="-4" rx="110" ry="2" fill="#5fa9e3" opacity=".7"/>
+              <ellipse cx="0" cy="2" rx="36" ry="9" fill="#0b1e30"/>
+              <ellipse cx="20" cy="0" rx="12" ry="4" fill="#5fa9e3" opacity=".75"/>
+              <circle cx="-4" cy="13" r="7" fill="#0b1e30"/>
+              <circle cx="-4" cy="13" r="4.5" fill="#2176c7"/>
+              <circle cx="-3" cy="12" r="1.5" fill="#fff" opacity=".8"/>
+              <path d="M-36 2 L-50 -4 L-50 8 Z" fill="url(#metal4)"/>
+              <path d="M-36 2 L-44 -10 L-38 -10 L-30 2 Z" fill="#0b1e30"/>
+              <ellipse cx="34" cy="2" rx="2" ry="10" fill="#0b1e30" opacity=".3"/>
+            </g>
+          </svg>
+        </div>
+        <div class="pbody">
+          <div class="porg">SATUMA · Pakistan Air Force</div>
+          <div class="pname">Border Eagle</div>
+          <div class="ptype">Border Surveillance UAV</div>
+          <div class="pdesc">Dedicated perimeter surveillance system for intelligence gathering and rapid threat detection along Pakistan's frontiers.</div>
+          <span class="pbadge">Mar 2000 — 2010</span>
+        </div>
+      </div>
+
+      <!-- SALAR / SALAR X -->
+      <div class="pcard reveal">
+        <div class="pillu">
+          <svg viewBox="0 0 400 210" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="metal5" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#3a8fd9"/>
+                <stop offset="60%" stop-color="#1255a1"/>
+                <stop offset="100%" stop-color="#0d3a6e"/>
+              </linearGradient>
+            </defs>
+            <ellipse cx="60" cy="40" rx="35" ry="6" fill="#fff" opacity=".6"/>
+            <ellipse cx="320" cy="55" rx="40" ry="7" fill="#fff" opacity=".5"/>
+            <ellipse cx="200" cy="190" rx="70" ry="5" fill="#0b1e30" opacity=".15"/>
+            <line x1="0" y1="160" x2="400" y2="160" stroke="#90bcd8" stroke-width=".5" stroke-dasharray="2 4" opacity=".5"/>
+            <g class="uav-art" transform="translate(200,100)">
+              <path d="M-90 -2 L 90 -2 L 95 2 L -95 2 Z" fill="url(#metal5)"/>
+              <rect x="-90" y="-3" width="180" height="2" fill="#5fa9e3" opacity=".7"/>
+              <ellipse cx="0" cy="0" rx="28" ry="7" fill="#0b1e30"/>
+              <ellipse cx="20" cy="-1" rx="6" ry="2" fill="#5fa9e3" opacity=".75"/>
+              <rect x="-32" y="-13" width="3" height="13" fill="url(#metal5)"/>
+              <rect x="-40" y="-15" width="20" height="2" fill="#0b1e30"/>
+              <line x1="29" y1="-7" x2="29" y2="7" stroke="#0b1e30" stroke-width="1.2" opacity=".7"/>
+              <ellipse cx="29" cy="0" rx="1.8" ry="9" fill="#0b1e30" opacity=".3"/>
+            </g>
+            <path d="M40 175 Q 200 168 360 175" stroke="#1255a1" stroke-width="0.7" stroke-dasharray="3 3" fill="none" opacity=".4"/>
+          </svg>
+        </div>
+        <div class="pbody">
+          <div class="porg">SATUMA · Pakistan Air Force</div>
+          <div class="pname">Salar / Salar X</div>
+          <div class="ptype">Short & Medium Range ISR UAV</div>
+          <div class="pdesc">Two-variant ISR family. Salar for short-range tactical missions; Salar X for extended medium-range operations with greater payload capacity.</div>
+          <span class="pbadge">Mar 2000 — 2010</span>
+        </div>
+      </div>
+
+      <!-- HST / FST Trainer -->
+      <div class="pcard reveal">
+        <div class="pillu">
+          <svg viewBox="0 0 400 210" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="metal6" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#5fa9e3"/>
+                <stop offset="60%" stop-color="#2176c7"/>
+                <stop offset="100%" stop-color="#1255a1"/>
+              </linearGradient>
+            </defs>
+            <ellipse cx="80" cy="38" rx="38" ry="6" fill="#fff" opacity=".6"/>
+            <ellipse cx="320" cy="52" rx="36" ry="6" fill="#fff" opacity=".5"/>
+            <ellipse cx="200" cy="190" rx="80" ry="5" fill="#0b1e30" opacity=".15"/>
+            <line x1="0" y1="160" x2="400" y2="160" stroke="#90bcd8" stroke-width=".5" stroke-dasharray="2 4" opacity=".5"/>
+            <g class="uav-art" transform="translate(200,100)">
+              <ellipse cx="0" cy="0" rx="100" ry="5" fill="url(#metal6)"/>
+              <ellipse cx="0" cy="-1" rx="100" ry="2.5" fill="#a5cef0" opacity=".7"/>
+              <ellipse cx="0" cy="0" rx="30" ry="8" fill="#0b1e30"/>
+              <rect x="-20" y="-3" width="35" height="2.5" fill="#ffcc00" opacity=".85"/>
+              <rect x="-20" y="-3" width="35" height="1" fill="#fff" opacity=".5"/>
+              <ellipse cx="20" cy="-1" rx="5" ry="2" fill="#fff" opacity=".7"/>
+              <path d="M-30 0 L-44 -7 L-44 7 Z" fill="url(#metal6)"/>
+              <path d="M-30 0 L-40 -12 L-34 -12 L-26 0 Z" fill="#0b1e30"/>
+              <line x1="-12" y1="8" x2="-12" y2="14" stroke="#0b1e30" stroke-width="1.5"/>
+              <circle cx="-12" cy="14" r="2" fill="#0b1e30"/>
+              <line x1="12" y1="8" x2="12" y2="14" stroke="#0b1e30" stroke-width="1.5"/>
+              <circle cx="12" cy="14" r="2" fill="#0b1e30"/>
+              <ellipse cx="28" cy="0" rx="2" ry="10" fill="#0b1e30" opacity=".3"/>
+            </g>
+          </svg>
+        </div>
+        <div class="pbody">
+          <div class="porg">SATUMA · Pakistan Air Force</div>
+          <div class="pname">HST / FST</div>
+          <div class="ptype">Trainer UAVs</div>
+          <div class="pdesc">High-Speed and Full-Scale Trainer UAVs for PAF pilot and crew certification. Essential platforms for training the next generation of UAV operators.</div>
+          <span class="pbadge">Mar 2000 — 2010</span>
+        </div>
+      </div>
+
+      <!-- OPTIMUS -->
+      <div class="pcard reveal">
+        <div class="pillu">
+          <svg viewBox="0 0 400 210" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="metal7" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#3a8fd9"/>
+                <stop offset="60%" stop-color="#1255a1"/>
+                <stop offset="100%" stop-color="#0d3a6e"/>
+              </linearGradient>
+            </defs>
+            <ellipse cx="60" cy="40" rx="35" ry="6" fill="#fff" opacity=".6"/>
+            <ellipse cx="320" cy="55" rx="40" ry="7" fill="#fff" opacity=".5"/>
+            <ellipse cx="200" cy="190" rx="100" ry="6" fill="#0b1e30" opacity=".15"/>
+            <line x1="0" y1="160" x2="400" y2="160" stroke="#90bcd8" stroke-width=".5" stroke-dasharray="2 4" opacity=".5"/>
+            <g class="uav-art" transform="translate(200,95)">
+              <path d="M-130 0 Q -65 -3 0 -3 Q 65 -3 130 0 L 130 3 Q 65 5 0 5 Q -65 5 -130 3 Z" fill="url(#metal7)"/>
+              <path d="M-130 -1 Q 0 -4 130 -1" stroke="#5fa9e3" stroke-width="1" fill="none" opacity=".7"/>
+              <path d="M125 0 L 138 -8 L 132 0 Z" fill="#0b1e30"/>
+              <path d="M-125 0 L -138 -8 L -132 0 Z" fill="#0b1e30"/>
+              <ellipse cx="0" cy="2" rx="36" ry="9" fill="#0b1e30"/>
+              <ellipse cx="22" cy="0" rx="14" ry="4" fill="#5fa9e3" opacity=".75"/>
+              <ellipse cx="22" cy="-1" rx="10" ry="2" fill="#fff" opacity=".5"/>
+              <path d="M-36 2 L-50 -8 L-46 -8 L-30 2 Z" fill="#0b1e30"/>
+              <path d="M-36 2 L-50 12 L-46 12 L-30 2 Z" fill="#0b1e30"/>
+              <ellipse cx="35" cy="2" rx="2" ry="10" fill="#0b1e30" opacity=".3"/>
+              <ellipse cx="0" cy="14" rx="6" ry="3" fill="#0b1e30"/>
+              <ellipse cx="0" cy="14" rx="3" ry="1.5" fill="#2176c7"/>
+            </g>
+            <path d="M40 175 Q 200 168 360 175" stroke="#1255a1" stroke-width="0.7" stroke-dasharray="3 3" fill="none" opacity=".4"/>
+          </svg>
+        </div>
+        <div class="pbody">
+          <div class="porg">Engineering Systems Pakistan</div>
+          <div class="pname">Optimus</div>
+          <div class="ptype">Multi-Role Fixed-Wing UAV</div>
+          <div class="pdesc">Versatile multi-role platform supporting ISR, target acquisition, and operational trials. Nadeem served as Lead Technician and Test Pilot.</div>
+          <span class="pbadge">Oct 2010 — May 2016</span>
+        </div>
+      </div>
+
+      <!-- HUD HUD (Oman) -->
+      <div class="pcard reveal">
+        <div class="pillu">
+          <svg viewBox="0 0 400 210" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="metal8" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#3a8fd9"/>
+                <stop offset="60%" stop-color="#1255a1"/>
+                <stop offset="100%" stop-color="#0d3a6e"/>
+              </linearGradient>
+              <linearGradient id="desert1" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#e8c89a"/>
+                <stop offset="100%" stop-color="#c9a576"/>
+              </linearGradient>
+            </defs>
+            <ellipse cx="80" cy="40" rx="38" ry="6" fill="#fff" opacity=".6"/>
+            <ellipse cx="310" cy="50" rx="36" ry="6" fill="#fff" opacity=".5"/>
+            <path d="M0 165 Q 100 155 200 162 T 400 158 L 400 210 L 0 210 Z" fill="url(#desert1)" opacity=".7"/>
+            <path d="M0 175 Q 100 168 200 172 T 400 170 L 400 210 L 0 210 Z" fill="#a8835c" opacity=".4"/>
+            <line x1="0" y1="170" x2="400" y2="170" stroke="#90bcd8" stroke-width=".5" stroke-dasharray="2 4" opacity=".4"/>
+            <g class="uav-art" transform="translate(200,95)">
+              <ellipse cx="0" cy="-2" rx="80" ry="4" fill="url(#metal8)"/>
+              <ellipse cx="0" cy="-3" rx="80" ry="2" fill="#5fa9e3" opacity=".7"/>
+              <ellipse cx="0" cy="2" rx="26" ry="7" fill="#0b1e30"/>
+              <ellipse cx="18" cy="0" rx="5" ry="2" fill="#5fa9e3" opacity=".75"/>
+              <path d="M-26 2 L-38 14 L-34 14 L-22 2 Z" fill="url(#metal8)"/>
+              <path d="M-26 2 L-38 -10 L-34 -10 L-22 2 Z" fill="url(#metal8)"/>
+              <ellipse cx="26" cy="2" rx="1.5" ry="8" fill="#0b1e30" opacity=".3"/>
+              <circle cx="-2" cy="11" r="5" fill="#0b1e30"/>
+              <circle cx="-2" cy="11" r="2.5" fill="#2176c7"/>
+            </g>
+          </svg>
+        </div>
+        <div class="pbody">
+          <div class="porg">ESP · Joint Forces of Oman</div>
+          <div class="pname">Hud Hud</div>
+          <div class="ptype">Reconnaissance UAV</div>
+          <div class="pdesc">Tactical ISR platform operated by Joint Forces of Oman. Nadeem was deployed as Mechanical Instructor to train Omani forces on this platform in 2015–2016.</div>
+          <span class="pbadge">2015 — 2016 · Oman</span>
+        </div>
+      </div>
+
+      <!-- ATARID Target -->
+      <div class="pcard reveal">
+        <div class="pillu">
+          <svg viewBox="0 0 400 210" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="orange1" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#ff9560"/>
+                <stop offset="60%" stop-color="#ff6b35"/>
+                <stop offset="100%" stop-color="#d44818"/>
+              </linearGradient>
+              <linearGradient id="desert2" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#e8c89a"/>
+                <stop offset="100%" stop-color="#c9a576"/>
+              </linearGradient>
+              <radialGradient id="flame2"><stop offset="0%" stop-color="#fff"/><stop offset="40%" stop-color="#ffeb3b"/><stop offset="100%" stop-color="#ff6b35" stop-opacity="0"/></radialGradient>
+            </defs>
+            <ellipse cx="60" cy="42" rx="35" ry="6" fill="#fff" opacity=".6"/>
+            <ellipse cx="320" cy="55" rx="40" ry="7" fill="#fff" opacity=".5"/>
+            <path d="M0 165 Q 100 155 200 162 T 400 158 L 400 210 L 0 210 Z" fill="url(#desert2)" opacity=".7"/>
+            <path d="M0 175 Q 100 168 200 172 T 400 170 L 400 210 L 0 210 Z" fill="#a8835c" opacity=".4"/>
+            <line x1="50" y1="100" x2="100" y2="100" stroke="#ff6b35" stroke-width="1.4" opacity=".5"/>
+            <line x1="40" y1="110" x2="80" y2="110" stroke="#ff6b35" stroke-width="1.1" opacity=".4"/>
+            <line x1="55" y1="90" x2="85" y2="90" stroke="#ff6b35" stroke-width=".8" opacity=".3"/>
+            <g class="uav-art" transform="translate(220,100)">
+              <path d="M-85 0 Q -80 -7 -45 -6 L 55 -5 Q 80 -4 90 0 Q 80 4 55 5 L -45 6 Q -80 7 -85 0 Z" fill="url(#orange1)"/>
+              <path d="M-85 0 Q -80 -6 -45 -5 L 55 -4 Q 75 -3 87 0" stroke="#fff" stroke-width="1" fill="none" opacity=".7"/>
+              <path d="M90 0 L 105 0 L 90 4 Z" fill="#0b1e30"/>
+              <path d="M90 0 L 105 0 L 90 -4 Z" fill="#0b1e30"/>
+              <path d="M-10 -2 L 30 -2 L 22 -18 L -2 -14 Z" fill="url(#orange1)"/>
+              <path d="M-10 2 L 30 2 L 22 18 L -2 14 Z" fill="url(#orange1)"/>
+              <rect x="-30" y="-1" width="6" height="2" fill="#fff"/>
+              <rect x="-15" y="-1" width="6" height="2" fill="#fff"/>
+              <path d="M-45 -5 L -60 -20 L -42 -20 L -34 -5 Z" fill="#0b1e30"/>
+              <ellipse cx="-100" cy="0" rx="22" ry="3.5" fill="url(#flame2)" opacity=".7"/>
+              <circle cx="-85" cy="0" r="5" fill="#ffeb3b"/>
+            </g>
+          </svg>
+        </div>
+        <div class="pbody">
+          <div class="porg">ESP · Joint Forces of Oman</div>
+          <div class="pname">Atarid</div>
+          <div class="ptype">Aerial Target Drone</div>
+          <div class="pdesc">High-performance target drone for Omani air defence training. Nadeem delivered mechanical instruction to Joint Forces crews for autonomous operation.</div>
+          <span class="pbadge">2015 — 2016 · Oman</span>
+        </div>
+      </div>
+
+      <!-- SKY GUARD -->
+      <div class="pcard reveal">
+        <div class="pillu">
+          <svg viewBox="0 0 400 210" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="metal10" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#3a8fd9"/>
+                <stop offset="60%" stop-color="#1255a1"/>
+                <stop offset="100%" stop-color="#0d3a6e"/>
+              </linearGradient>
+              <linearGradient id="desert3" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#e8c89a"/>
+                <stop offset="100%" stop-color="#c9a576"/>
+              </linearGradient>
+            </defs>
+            <ellipse cx="60" cy="35" rx="38" ry="6" fill="#fff" opacity=".6"/>
+            <ellipse cx="320" cy="48" rx="40" ry="7" fill="#fff" opacity=".5"/>
+            <path d="M0 168 Q 80 158 160 165 T 320 162 T 400 160 L 400 210 L 0 210 Z" fill="url(#desert3)" opacity=".55"/>
+            <line x1="0" y1="170" x2="400" y2="170" stroke="#90bcd8" stroke-width=".5" stroke-dasharray="2 4" opacity=".4"/>
+            <g class="uav-art" transform="translate(200,90)">
+              <path d="M-150 -2 Q -75 -5 0 -4 Q 75 -5 150 -2 L 150 2 Q 75 4 0 3 Q -75 4 -150 2 Z" fill="url(#metal10)"/>
+              <path d="M-150 -3 Q 0 -6 150 -3" stroke="#5fa9e3" stroke-width="1" fill="none" opacity=".7"/>
+              <line x1="148" y1="-2" x2="148" y2="-13" stroke="#0b1e30" stroke-width="1.2"/>
+              <line x1="-148" y1="-2" x2="-148" y2="-13" stroke="#0b1e30" stroke-width="1.2"/>
+              <ellipse cx="0" cy="2" rx="40" ry="10" fill="#0b1e30"/>
+              <ellipse cx="22" cy="0" rx="16" ry="5" fill="#5fa9e3" opacity=".8"/>
+              <ellipse cx="22" cy="-1" rx="12" ry="2.5" fill="#fff" opacity=".5"/>
+              <path d="M-12 -8 a 12 8 0 0 1 24 0 Z" fill="#0b1e30"/>
+              <path d="M-12 -8 a 12 8 0 0 1 24 0" stroke="#5fa9e3" stroke-width="1" fill="none" opacity=".6"/>
+              <line x1="0" y1="-15" x2="0" y2="-22" stroke="#0b1e30" stroke-width="1"/>
+              <circle cx="0" cy="-22" r="1.5" fill="#0b1e30"/>
+              <path d="M-40 2 L-55 -10 L-50 -10 L-32 2 Z" fill="#0b1e30"/>
+              <path d="M-40 2 L-55 14 L-50 14 L-32 2 Z" fill="#0b1e30"/>
+              <circle cx="-5" cy="14" r="6" fill="#0b1e30"/>
+              <circle cx="-5" cy="14" r="3" fill="#2176c7"/>
+              <ellipse cx="38" cy="2" rx="2" ry="11" fill="#0b1e30" opacity=".3"/>
+            </g>
+          </svg>
+        </div>
+        <div class="pbody">
+          <div class="porg">SATUMA / PSDSARC · Saudi Arabia</div>
+          <div class="pname">Sky Guard</div>
+          <div class="ptype">Strategic Surveillance UAV</div>
+          <div class="pdesc">Strategic surveillance programme based in Riyadh. Nadeem was seconded to PSDSARC for nearly three years to provide sustained on-site technical support.</div>
+          <span class="pbadge">May 2019 — Feb 2022 · Riyadh</span>
+        </div>
+      </div>
+
+      <!-- BRAVO+ -->
+      <div class="pcard reveal">
+        <div class="pillu">
+          <svg viewBox="0 0 400 210" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="metal11" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#3a8fd9"/>
+                <stop offset="60%" stop-color="#1255a1"/>
+                <stop offset="100%" stop-color="#0d3a6e"/>
+              </linearGradient>
+            </defs>
+            <ellipse cx="80" cy="40" rx="38" ry="6" fill="#fff" opacity=".6"/>
+            <ellipse cx="310" cy="50" rx="36" ry="6" fill="#fff" opacity=".5"/>
+            <ellipse cx="200" cy="190" rx="80" ry="5" fill="#0b1e30" opacity=".15"/>
+            <line x1="0" y1="160" x2="400" y2="160" stroke="#90bcd8" stroke-width=".5" stroke-dasharray="2 4" opacity=".5"/>
+            <g class="uav-art" transform="translate(200,100)">
+              <ellipse cx="0" cy="-2" rx="95" ry="5" fill="url(#metal11)"/>
+              <ellipse cx="0" cy="-3" rx="95" ry="2.5" fill="#5fa9e3" opacity=".7"/>
+              <ellipse cx="0" cy="2" rx="32" ry="8" fill="#0b1e30"/>
+              <ellipse cx="20" cy="0" rx="6" ry="2" fill="#5fa9e3" opacity=".75"/>
+              <path d="M-32 2 L-46 -5 L-46 9 Z" fill="url(#metal11)"/>
+              <path d="M-32 2 L-42 -10 L-36 -10 L-28 2 Z" fill="#0b1e30"/>
+              <rect x="-46" y="-2" width="14" height="2" fill="#5fa9e3" opacity=".7"/>
+              <ellipse cx="32" cy="2" rx="2" ry="9" fill="#0b1e30" opacity=".3"/>
+              <circle cx="-3" cy="11" r="5" fill="#0b1e30"/>
+              <circle cx="-3" cy="11" r="2.5" fill="#2176c7"/>
+            </g>
+            <path d="M40 175 Q 200 168 360 175" stroke="#1255a1" stroke-width="0.7" stroke-dasharray="3 3" fill="none" opacity=".4"/>
+          </svg>
+        </div>
+        <div class="pbody">
+          <div class="porg">SATUMA · Pakistan Air Force</div>
+          <div class="pname">Bravo+</div>
+          <div class="ptype">Tactical UAV</div>
+          <div class="pdesc">Enhanced tactical surveillance UAV for border monitoring and battlefield situational awareness. Part of SATUMA's early operational portfolio.</div>
+          <span class="pbadge">Mar 2000 — 2010</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="skills">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="tag">03</span>
+      <h2 class="stitle">Core Competencies</h2>
+      <div class="sline"></div>
+    </div>
+    <div class="sgrid">
+      <div class="scard reveal">
+        <div class="sicon"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
+        <div class="stitle2">Mechanical Engineering</div>
+        <ul class="sitems">
+          <li>Airframe fabrication &amp; composite structures</li>
+          <li>Powerplant assembly &amp; overhaul</li>
+          <li>Landing gear &amp; actuator systems</li>
+          <li>Hydraulic &amp; fuel systems</li>
+          <li>Structural repair &amp; NDT inspection</li>
+        </ul>
+      </div>
+      <div class="scard reveal">
+        <div class="sicon"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg></div>
+        <div class="stitle2">UAV Flight Operations</div>
+        <ul class="sitems">
+          <li>Fixed-wing UAV test pilot (military &amp; civil)</li>
+          <li>Flight planning &amp; airspace coordination</li>
+          <li>Pre/post-flight inspection protocols</li>
+          <li>GCS — Ground Control Station operation</li>
+          <li>Emergency &amp; contingency procedures</li>
+        </ul>
+      </div>
+      <div class="scard reveal">
+        <div class="sicon"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+        <div class="stitle2">Systems Integration</div>
+        <ul class="sitems">
+          <li>Avionics &amp; payload integration</li>
+          <li>Autopilot tuning &amp; configuration</li>
+          <li>Data-link &amp; telemetry systems</li>
+          <li>EO/IR sensor installation</li>
+          <li>Harness &amp; electrical systems</li>
+        </ul>
+      </div>
+      <div class="scard reveal">
+        <div class="sicon"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+        <div class="stitle2">Training &amp; Instruction</div>
+        <ul class="sitems">
+          <li>International military instruction (Oman JF)</li>
+          <li>Maintenance crew development</li>
+          <li>Technical documentation &amp; SOPs</li>
+          <li>Pilot mentoring &amp; certification support</li>
+          <li>Safety management &amp; risk assessment</li>
+        </ul>
+      </div>
+      <div class="scard reveal">
+        <div class="sicon"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg></div>
+        <div class="stitle2">Operations Management</div>
+        <ul class="sitems">
+          <li>Multi-programme operations oversight</li>
+          <li>Cross-border team coordination</li>
+          <li>Defence programme liaison</li>
+          <li>Maintenance scheduling &amp; logistics</li>
+          <li>Quality assurance &amp; airworthiness</li>
+        </ul>
+      </div>
+      <div class="scard reveal">
+        <div class="sicon"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="stitle2">Regulatory &amp; Safety</div>
+        <ul class="sitems">
+          <li>FAA Part 107 Remote Pilot certified</li>
+          <li>FAA AMT Airframe &amp; Powerplant</li>
+          <li>65+ FAA certification portfolio</li>
+          <li>Military airworthiness standards</li>
+          <li>Incident investigation &amp; reporting</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="certifications">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="tag">04</span>
+      <h2 class="stitle">Certifications</h2>
+      <div class="sline"></div>
+    </div>
+    <div class="cgrid">
+      <div class="ccard key reveal"><div class="corg">FAA</div><div class="cname">Part 107 Remote Pilot Certificate</div></div>
+      <div class="ccard key reveal"><div class="corg">FAA</div><div class="cname">AMT Airframe</div></div>
+      <div class="ccard key reveal"><div class="corg">FAA</div><div class="cname">AMT Powerplant</div></div>
+      <div class="ccard reveal"><div class="corg">FAA</div><div class="cname">Aviation Maintenance Technician — Multiple Modules</div></div>
+      <div class="ccard reveal"><div class="corg">FAA</div><div class="cname">UAS Operations &amp; Airspace Classification</div></div>
+      <div class="ccard reveal"><div class="corg">FAA</div><div class="cname">Aviation Safety, Weather &amp; Navigation</div></div>
+    </div>
+    <div class="cbig reveal">
+      <div class="num">65+</div>
+      <div class="lbl">Total FAA<br>Certifications<br>Achieved</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="education">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="tag">05</span>
+      <h2 class="stitle">Education</h2>
+      <div class="sline"></div>
+    </div>
+    <div class="educard reveal">
+      <div class="eduicon"><svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5-10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+      <div>
+        <div class="edudeg">Diploma of Associate Engineering (DAE)</div>
+        <div class="eduspec">Mechanical Technology</div>
+        <div class="eduinst">Punjab Board of Technical Education, Rawalpindi, Pakistan</div>
+        <div class="eduyear">1997 — 2000</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="contact-wrap">
+      <div class="contact-left reveal">
+        <h2>Get In Touch</h2>
+        <p>Available for UAV engineering roles, consulting engagements, technical instruction, and defence programme support across the GCC and internationally.</p>
+      </div>
+      <div class="contact-items reveal">
+        <a class="citem" href="tel:+966539199248">
+          <div class="citem-icon"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg></div>
+          <div><div class="citem-label">Phone / WhatsApp</div><div class="citem-val">+966 53 919 9248</div></div>
+        </a>
+        <a class="citem" href="mailto:nadeem.sheikh101980@gmail.com">
+          <div class="citem-icon"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div><div class="citem-label">Email</div><div class="citem-val">nadeem.sheikh101980@gmail.com</div></div>
+        </a>
+        <div class="citem">
+          <div class="citem-icon"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div><div class="citem-label">Location</div><div class="citem-val">Riyadh, Saudi Arabia</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fi">
+    <div class="flogo">Muhammad Nadeem Sheikh</div>
+    <div class="flinks">
+      <a href="#experience">Experience</a>
+      <a href="#platforms">Platforms</a>
+      <a href="#skills">Skills</a>
+      <a href="#certifications">Certs</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="fcopy">UAV Systems Specialist · 26 Years · Riyadh KSA</div>
+  </div>
+</footer>
+
+<script>
+// Reveal-on-scroll
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// 3D tilt on platform & skill cards (subtle)
+function bindTilt(selector) {
+  document.querySelectorAll(selector).forEach(card => {
+    card.addEventListener('mousemove', (ev) => {
+      const r = card.getBoundingClientRect();
+      const x = (ev.clientX - r.left) / r.width - 0.5;
+      const y = (ev.clientY - r.top) / r.height - 0.5;
+      card.style.transform = `translateY(-6px) rotateX(${(-y * 4).toFixed(2)}deg) rotateY(${(x * 5).toFixed(2)}deg)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
+  });
+}
+bindTilt('.pcard');
+bindTilt('.scard');
+bindTilt('.ccard');
+
+// Smooth scroll offset for sticky nav
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', function(e) {
+    const id = this.getAttribute('href');
+    if (id.length > 1) {
+      const t = document.querySelector(id);
+      if (t) {
+        e.preventDefault();
+        const y = t.getBoundingClientRect().top + window.pageYOffset - 70;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    }
+  });
+});
+
+// Subtle hero parallax
+const hero = document.querySelector('#hero');
+const hud = document.querySelector('.hero-hud');
+if (hero && hud) {
+  hero.addEventListener('mousemove', (ev) => {
+    const r = hero.getBoundingClientRect();
+    const x = (ev.clientX - r.left) / r.width - 0.5;
+    const y = (ev.clientY - r.top) / r.height - 0.5;
+    hud.style.transform = `translate(${x * 12}px, ${y * 12}px)`;
+  });
+}
+</script>
+
+</body>
+</html>

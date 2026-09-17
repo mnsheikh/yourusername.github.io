@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RC &amp; UAV Services | ABD RC</title>
+<meta name="description" content="Explore ABD RC's full service ecosystem: RC aircraft, UAV & drone services, FPV, helicopters, RC cars, custom engineering, manufacturing, repair, electronics and flight testing.">
+<link rel="canonical" href="https://abdrc.wuaze.com/services.html">
+<meta property="og:title" content="RC & UAV Services | ABD RC">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="services">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="bg-grid"></div><div class="bg-noise"></div>
+<header id="site-header"></header>
+
+<main id="main">
+  <section class="page-header">
+    <div class="container">
+      <div class="breadcrumb"><a href="index.html">Home</a><span class="sep">/</span><span>Services</span></div>
+      <span class="eyebrow">Service Ecosystem</span>
+      <h1>Ten disciplines. One engineering standard.</h1>
+      <p>From fixed-wing RC aircraft to full UAV platforms — every service is delivered with the same engineering rigor, documentation and flight-test discipline.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid grid-3" id="all-services-grid"></div>
+    </div>
+  </section>
+
+  <section class="section-sm" style="background:var(--bg-elevated);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+    <div class="container">
+      <div class="cta-band reveal">
+        <span class="eyebrow" style="justify-content:center;">Not sure where to start?</span>
+        <h2>Talk to an engineer before you commit</h2>
+        <p>Our consultancy service helps you choose the right platform, power system and approach before a single part is ordered.</p>
+        <div class="btn-group" style="justify-content:center;">
+          <a href="consultancy.html" class="btn btn-primary">Explore Consultancy</a>
+          <a href="quote.html" class="btn btn-outline">Request a Quote</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="site-footer"></footer>
+<div id="float-stack" class="float-stack"></div>
+
+<script src="js/icons.js"></script>
+<script src="js/data.js"></script>
+<script src="js/components.js"></script>
+<script src="js/main.js"></script>
+<script src="js/forms.js"></script>
+<script src="js/chat-widget.js"></script>
+<script>
+  document.getElementById('all-services-grid').innerHTML = ABD.services.map(s => `
+    <div class="card reveal">
+      <div class="ic">${ABD.icon(s.icon)}</div>
+      <h3>${s.name}</h3>
+      <p>${s.short}</p>
+      <p class="text-muted" style="font-size:.78rem;margin-bottom:14px;">${s.items.slice(0,3).join(' · ')}</p>
+      <a class="card-link" href="service-${s.slug}.html">Learn More ${ABD.icon('arrowRight')}</a>
+    </div>`).join('');
+</script>
+</body>
+</html>

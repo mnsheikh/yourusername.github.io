@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Request a Quote | ABD RC</title>
+<meta name="description" content="Request a project quote from ABD RC: tell us about your RC aircraft, UAV, FPV, engineering or repair project and receive a detailed technical proposal.">
+<link rel="canonical" href="https://abdrc.wuaze.com/quote.html">
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="quote">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="bg-grid"></div><div class="bg-noise"></div>
+<header id="site-header"></header>
+
+<main id="main">
+  <section class="page-header">
+    <div class="container">
+      <div class="breadcrumb"><a href="index.html">Home</a><span class="sep">/</span><span>Request a Quote</span></div>
+      <span class="eyebrow">Start a Project</span>
+      <h1>Request a Quote</h1>
+      <p>Tell us about your project in four short steps — our engineers will follow up with a detailed technical proposal, typically within 1–2 business days.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="max-width:760px;">
+      <div class="panel">
+        <div class="stepper" id="quote-form-stepper">
+          <div class="prog" style="width:0%;"></div>
+          <div class="step-node active"><div class="circ">1</div><span>Customer</span></div>
+          <div class="step-node"><div class="circ">2</div><span>Service</span></div>
+          <div class="step-node"><div class="circ">3</div><span>Project</span></div>
+          <div class="step-node"><div class="circ">4</div><span>Files</span></div>
+        </div>
+
+        <form id="quote-form">
+          <!-- STEP 1 -->
+          <div class="form-step active">
+            <h3 class="mb-2">Customer Information</h3>
+            <div class="field-row">
+              <div class="field"><label>Full Name <span class="req">*</span></label><input type="text" required></div>
+              <div class="field"><label>Company</label><input type="text"></div>
+            </div>
+            <div class="field-row">
+              <div class="field"><label>Email <span class="req">*</span></label><input type="email" required></div>
+              <div class="field"><label>Phone <span class="req">*</span></label><input type="tel" required></div>
+            </div>
+            <div class="field"><label>Country <span class="req">*</span></label><input type="text" required placeholder="e.g. Pakistan"></div>
+          </div>
+
+          <!-- STEP 2 -->
+          <div class="form-step">
+            <h3 class="mb-2">Service Type</h3>
+            <div class="radio-grid" id="service-type-grid">
+              <label class="radio-card"><input type="radio" name="svc" required value="RC Aircraft"><span>RC Aircraft</span></label>
+              <label class="radio-card"><input type="radio" name="svc" value="UAV"><span>UAV</span></label>
+              <label class="radio-card"><input type="radio" name="svc" value="FPV"><span>FPV</span></label>
+              <label class="radio-card"><input type="radio" name="svc" value="Helicopter"><span>Helicopter</span></label>
+              <label class="radio-card"><input type="radio" name="svc" value="RC Car"><span>RC Car</span></label>
+              <label class="radio-card"><input type="radio" name="svc" value="Engineering"><span>Engineering</span></label>
+              <label class="radio-card"><input type="radio" name="svc" value="Manufacturing"><span>Manufacturing</span></label>
+              <label class="radio-card"><input type="radio" name="svc" value="Repair"><span>Repair</span></label>
+              <label class="radio-card"><input type="radio" name="svc" value="Training"><span>Training</span></label>
+              <label class="radio-card"><input type="radio" name="svc" value="Consultancy"><span>Consultancy</span></label>
+              <label class="radio-card"><input type="radio" name="svc" value="Other"><span>Other</span></label>
+            </div>
+          </div>
+
+          <!-- STEP 3 -->
+          <div class="form-step">
+            <h3 class="mb-2">Project Information</h3>
+            <div class="field"><label>Project Description <span class="req">*</span></label><textarea required placeholder="What are you trying to build, fix or achieve?"></textarea></div>
+            <div class="field"><label>Requirements</label><textarea placeholder="Payload, performance targets, constraints..."></textarea></div>
+            <div class="field-row">
+              <div class="field"><label>Budget Range</label>
+                <select>
+                  <option>Under $500</option>
+                  <option>$500 – $2,000</option>
+                  <option>$2,000 – $10,000</option>
+                  <option>$10,000+</option>
+                  <option>Not sure yet</option>
+                </select>
+              </div>
+              <div class="field"><label>Timeline</label>
+                <select>
+                  <option>As soon as possible</option>
+                  <option>Within 1 month</option>
+                  <option>1–3 months</option>
+                  <option>Flexible</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 4 -->
+          <div class="form-step">
+            <h3 class="mb-2">Upload Files</h3>
+            <p class="text-muted mb-2">CAD files, images, PDFs or technical drawings — optional but helps us scope your project accurately.</p>
+            <div class="file-drop" id="file-drop">
+              <input type="file" id="file-input" multiple hidden accept=".pdf,.jpg,.jpeg,.png,.step,.stp,.dxf,.stl">
+              <div>Drag files here, or click to browse</div>
+              <div class="hint">PDF, JPG, PNG, STEP, STL, DXF — up to 25MB each</div>
+            </div>
+            <ul class="file-list" id="file-list"></ul>
+          </div>
+
+          <div class="form-nav">
+            <button type="button" class="btn btn-ghost" data-action="back">Back</button>
+            <button type="button" class="btn btn-primary" data-action="next">Next Step</button>
+            <button type="submit" class="btn btn-primary hidden" data-action="submit">Submit Project Request</button>
+          </div>
+        </form>
+
+        <div class="success-box hidden">
+          <div class="check"></div>
+          <h3>Project Request Submitted</h3>
+          <p>Thank you — your reference number is below. Our team will review your project and respond with a detailed proposal.</p>
+          <div class="ref-code"></div>
+          <div class="btn-group mt-3" style="justify-content:center;">
+            <a href="index.html" class="btn btn-outline">Return Home</a>
+            <a href="portal-login.html" class="btn btn-outline">Track in Customer Portal</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="site-footer"></footer>
+<div id="float-stack" class="float-stack"></div>
+
+<script src="js/icons.js"></script>
+<script src="js/data.js"></script>
+<script src="js/components.js"></script>
+<script src="js/main.js"></script>
+<script src="js/forms.js"></script>
+<script src="js/chat-widget.js"></script>
+<script>document.querySelector('.success-box .check').innerHTML = ABD.icon('check');</script>
+</body>
+</html>

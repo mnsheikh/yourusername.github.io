@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RC &amp; UAV Consultancy | Platform &amp; Power-System Selection | ABD RC</title>
+<meta name="description" content="Technical consultancy for RC and UAV projects: platform selection, power-system and battery selection, payload integration, project planning and fleet maintenance planning.">
+<link rel="canonical" href="https://abdrc.wuaze.com/consultancy.html">
+<meta property="og:title" content="RC & UAV Consultancy | ABD RC">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="consultancy">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="bg-grid"></div><div class="bg-noise"></div>
+<header id="site-header"></header>
+
+<main id="main">
+  <section class="page-header">
+    <div class="container">
+      <div class="breadcrumb"><a href="index.html">Home</a><span class="sep">/</span><span>Consultancy</span></div>
+      <span class="eyebrow">Technical Consultancy</span>
+      <h1>Decide before you build, not after</h1>
+      <p>Independent, engineering-led guidance on platform selection, power systems and project planning — before you commit budget to the wrong approach.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid grid-3" id="consult-grid"></div>
+    </div>
+  </section>
+
+  <section class="section-sm" style="background:var(--bg-elevated);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+    <div class="container two-col">
+      <div class="reveal">
+        <span class="eyebrow">How It Works</span>
+        <h2>A structured consultation, not a sales call</h2>
+        <div class="timeline mt-2">
+          <div class="timeline-item"><span class="yr">Step 1</span><h4>Requirements review</h4><p class="text-muted mt-1">We review your mission, budget and constraints in detail.</p></div>
+          <div class="timeline-item"><span class="yr">Step 2</span><h4>Options analysis</h4><p class="text-muted mt-1">We present platform, power-system and vendor options with tradeoffs explained.</p></div>
+          <div class="timeline-item"><span class="yr">Step 3</span><h4>Recommendation &amp; documentation</h4><p class="text-muted mt-1">A written recommendation you can act on immediately, with or without ABD RC as the build partner.</p></div>
+        </div>
+      </div>
+      <div class="reveal blueprint-frame">
+        <div class="inner"><span class="icon-display" data-i="briefcase"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="cta-band reveal">
+        <h2>Get engineering-grade advice, before you spend</h2>
+        <p>Tell us about your project and constraints — we'll respond with a scoped consultancy proposal.</p>
+        <div class="btn-group" style="justify-content:center;">
+          <a href="quote.html" class="btn btn-primary">Request a Quote</a>
+          <a href="contact.html" class="btn btn-outline">Talk to an Engineer</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="site-footer"></footer>
+<div id="float-stack" class="float-stack"></div>
+
+<script src="js/icons.js"></script>
+<script src="js/data.js"></script>
+<script src="js/components.js"></script>
+<script src="js/main.js"></script>
+<script src="js/forms.js"></script>
+<script src="js/chat-widget.js"></script>
+<script>
+  document.querySelectorAll('[data-i]').forEach(el => el.innerHTML = ABD.icon(el.dataset.i));
+  const consultItems = [
+    { i:"plane", t:"RC Aircraft Selection", d:"Match an airframe category and power system to your mission and skill level." },
+    { i:"drone", t:"UAV Platform Selection", d:"Compare multirotor, fixed-wing and VTOL platforms against payload and endurance needs." },
+    { i:"electronics", t:"Power-System &amp; Battery Selection", d:"Right-size motors, ESCs and batteries for performance and safety margins." },
+    { i:"engineering", t:"Motor / Propeller Matching", d:"Avoid current-draw and thermal issues with a verified power-system match." },
+    { i:"test", t:"Performance Analysis", d:"Evaluate an existing platform's performance against its intended mission." },
+    { i:"package", t:"Payload Integration Planning", d:"Plan mounting, power and vibration isolation for sensor and camera payloads." },
+    { i:"grid", t:"Autopilot Selection", d:"Compare open-source and commercial autopilot options for your use case." },
+    { i:"briefcase", t:"Project Planning", d:"Scope timeline, budget and milestones before a build begins." },
+    { i:"users", t:"Fleet Maintenance Planning", d:"Build a maintenance schedule for operators managing multiple platforms." },
+    { i:"file", t:"Technical Documentation", d:"Specification sheets, wiring diagrams and maintenance logs for your fleet." },
+  ];
+  document.getElementById('consult-grid').innerHTML = consultItems.map(c => `
+    <div class="card reveal">
+      <div class="ic">${ABD.icon(c.i)}</div>
+      <h3>${c.t}</h3>
+      <p>${c.d}</p>
+    </div>`).join('');
+</script>
+</body>
+</html>

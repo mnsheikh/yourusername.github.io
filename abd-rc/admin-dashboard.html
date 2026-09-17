@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard | ABD RC</title>
+<meta name="description" content="ABD RC admin dashboard — manage customers, quotes, bookings, repairs, projects, training and website analytics.">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="admin">
+<div class="demo-banner">DEMO INTERFACE — populated with mock data for illustration. Connect a real backend/CRM to make this dashboard live.</div>
+<div class="dash-shell">
+  <aside class="dash-sidebar">
+    <a href="index.html" class="brand"><span class="brand-mark" id="brand-mark"></span><span><span>ABD RC</span><small>Admin Dashboard</small></span></a>
+    <nav class="dash-nav" id="admin-nav">
+      <div class="grp">Overview</div>
+      <a href="#" data-tab="overview" class="active"><span data-i="grid"></span> Dashboard</a>
+      <div class="grp">Operations</div>
+      <a href="#" data-tab="customers"><span data-i="users"></span> Customers</a>
+      <a href="#" data-tab="quotes"><span data-i="file"></span> Quote Requests</a>
+      <a href="#" data-tab="bookings"><span data-i="calendar"></span> Service Bookings</a>
+      <a href="#" data-tab="repairs"><span data-i="tool"></span> Repair Tracking</a>
+      <a href="#" data-tab="projects"><span data-i="layers"></span> Project Management</a>
+      <a href="#" data-tab="training"><span data-i="graduation"></span> Training Registrations</a>
+      <a href="#" data-tab="inquiries"><span data-i="package"></span> Product Inquiries</a>
+      <a href="#" data-tab="messages"><span data-i="message"></span> Contact Messages</a>
+      <div class="grp">Organization</div>
+      <a href="#" data-tab="team"><span data-i="briefcase"></span> Team Management</a>
+      <a href="#" data-tab="analytics"><span data-i="trending"></span> Website Analytics</a>
+      <a href="portal-login.html"><span data-i="logout"></span> Log Out</a>
+    </nav>
+  </aside>
+
+  <div class="dash-main">
+    <div class="dash-topbar">
+      <div><h1 style="font-size:1.5rem;">Operations Overview</h1><p class="text-muted" style="font-size:.86rem;">Live snapshot across leads, projects and service operations.</p></div>
+      <div class="flex gap-1"><span class="tag">Admin: [Name Placeholder]</span></div>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div class="admin-panel" data-panel="overview">
+      <div class="dash-kpis">
+        <div class="kpi"><div class="top"><span class="ic" data-i="zap"></span><span class="delta up">+12%</span></div><div class="num">18</div><div class="lbl">New Leads (30d)</div></div>
+        <div class="kpi"><div class="top"><span class="ic" data-i="layers"></span><span class="delta up">+3</span></div><div class="num">9</div><div class="lbl">Active Projects</div></div>
+        <div class="kpi"><div class="top"><span class="ic" data-i="file"></span><span class="delta down">-2</span></div><div class="num">6</div><div class="lbl">Pending Quotes</div></div>
+        <div class="kpi"><div class="top"><span class="ic" data-i="tool"></span><span class="delta">Steady</span></div><div class="num">5</div><div class="lbl">Repairs In Progress</div></div>
+        <div class="kpi"><div class="top"><span class="ic" data-i="graduation"></span><span class="delta up">+4</span></div><div class="num">27</div><div class="lbl">Training Students</div></div>
+        <div class="kpi"><div class="top"><span class="ic" data-i="dollar"></span><span class="delta up">+8%</span></div><div class="num">$—</div><div class="lbl">Monthly Revenue (connect billing)</div></div>
+      </div>
+
+      <div class="grid grid-2">
+        <div class="panel chart-box">
+          <div class="panel-head"><h3>Leads by Channel (30 days)</h3></div>
+          <svg viewBox="0 0 320 160" style="width:100%;height:160px;">
+            <g font-family="JetBrains Mono" font-size="8" fill="#64717e">
+              <text x="0" y="10">18</text><text x="0" y="50">12</text><text x="0" y="90">6</text><text x="0" y="130">0</text>
+            </g>
+            <g stroke="rgba(255,255,255,.08)"><line x1="24" y1="8" x2="320" y2="8"/><line x1="24" y1="48" x2="320" y2="48"/><line x1="24" y1="88" x2="320" y2="88"/><line x1="24" y1="128" x2="320" y2="128"/></g>
+            <g fill="#00d9ff">
+              <rect x="40" y="48" width="28" height="80" rx="3"/>
+              <rect x="90" y="68" width="28" height="60" rx="3"/>
+              <rect x="140" y="30" width="28" height="98" rx="3"/>
+              <rect x="190" y="88" width="28" height="40" rx="3"/>
+              <rect x="240" y="98" width="28" height="30" rx="3"/>
+              <rect x="290" y="108" width="20" height="20" rx="3"/>
+            </g>
+            <g font-family="Inter" font-size="8" fill="#9fadba">
+              <text x="42" y="142">Quote</text><text x="92" y="142">Chat</text><text x="145" y="142">Booking</text><text x="196" y="142">Phone</text><text x="238" y="142">Referral</text><text x="286" y="142">Other</text>
+            </g>
+          </svg>
+        </div>
+        <div class="panel chart-box">
+          <div class="panel-head"><h3>Project Volume Trend</h3></div>
+          <svg viewBox="0 0 320 160" style="width:100%;height:160px;">
+            <g stroke="rgba(255,255,255,.08)"><line x1="10" y1="8" x2="320" y2="8"/><line x1="10" y1="48" x2="320" y2="48"/><line x1="10" y1="88" x2="320" y2="88"/><line x1="10" y1="128" x2="320" y2="128"/></g>
+            <polyline points="10,110 60,95 110,100 160,70 210,75 260,45 310,30" fill="none" stroke="#ff7a1a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <g fill="#ff7a1a"><circle cx="10" cy="110" r="3"/><circle cx="60" cy="95" r="3"/><circle cx="110" cy="100" r="3"/><circle cx="160" cy="70" r="3"/><circle cx="210" cy="75" r="3"/><circle cx="260" cy="45" r="3"/><circle cx="310" cy="30" r="3"/></g>
+            <g font-family="Inter" font-size="8" fill="#9fadba"><text x="0" y="142">Apr</text><text x="52" y="142">May</text><text x="102" y="142">Jun</text><text x="152" y="142">Jul</text><text x="202" y="142">Aug</text><text x="255" y="142">Sep</text><text x="300" y="142">Oct</text></g>
+          </svg>
+          <div class="chart-legend"><span><span class="dot" style="background:#ff7a1a;"></span>Projects opened per month</span></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head"><h3>Recent Leads</h3></div>
+        <table class="data-table" id="leads-table"></table>
+      </div>
+    </div>
+
+    <!-- CUSTOMERS -->
+    <div class="admin-panel hidden" data-panel="customers">
+      <div class="panel"><div class="panel-head"><h3>Customers</h3></div>
+        <table class="data-table">
+          <thead><tr><th>Name</th><th>Email</th><th>Projects</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>D. Whitfield</td><td>d.whitfield@example.com</td><td>2</td><td><span class="status-pill status-active">Active</span></td></tr>
+            <tr><td>A. Kessler</td><td>a.kessler@example.com</td><td>1</td><td><span class="status-pill status-active">Active</span></td></tr>
+            <tr><td>R. Okafor</td><td>r.okafor@example.com</td><td>1</td><td><span class="status-pill status-done">Completed</span></td></tr>
+            <tr><td>M. Laurent</td><td>m.laurent@example.com</td><td>1</td><td><span class="status-pill status-active">Active</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- QUOTES -->
+    <div class="admin-panel hidden" data-panel="quotes">
+      <div class="panel"><div class="panel-head"><h3>Quote Requests</h3></div>
+        <table class="data-table">
+          <thead><tr><th>Ref</th><th>Customer</th><th>Service</th><th>Budget</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>PRJ-4F21</td><td>D. Whitfield</td><td>UAV</td><td>$10,000+</td><td><span class="status-pill status-new">New</span></td></tr>
+            <tr><td>PRJ-2A09</td><td>A. Kessler</td><td>Manufacturing</td><td>$2,000–$10,000</td><td><span class="status-pill status-active">Reviewing</span></td></tr>
+            <tr><td>PRJ-1C88</td><td>S. Nakamura</td><td>Engineering</td><td>$10,000+</td><td><span class="status-pill status-done">Quoted</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- BOOKINGS -->
+    <div class="admin-panel hidden" data-panel="bookings">
+      <div class="panel"><div class="panel-head"><h3>Service Bookings</h3></div>
+        <table class="data-table">
+          <thead><tr><th>Ref</th><th>Customer</th><th>Service</th><th>Date</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>BKG-8823</td><td>J. Alvarez</td><td>Repair — Wing Damage</td><td>2026-09-14</td><td><span class="status-pill status-active">Confirmed</span></td></tr>
+            <tr><td>BKG-7912</td><td>M. Laurent</td><td>FPV Pilot Course</td><td>2026-09-25</td><td><span class="status-pill status-pending">Pending</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- REPAIRS -->
+    <div class="admin-panel hidden" data-panel="repairs">
+      <div class="panel"><div class="panel-head"><h3>Repair Tracking</h3></div>
+        <table class="data-table">
+          <thead><tr><th>Ref</th><th>Item</th><th>Issue</th><th>Technician</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>BKG-8823</td><td>Trainer Aircraft</td><td>Wing damage</td><td>[Assigned Tech]</td><td><span class="status-pill status-active">In Progress</span></td></tr>
+            <tr><td>BKG-7710</td><td>FPV Quad</td><td>ESC replacement</td><td>[Assigned Tech]</td><td><span class="status-pill status-done">Completed</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- PROJECTS -->
+    <div class="admin-panel hidden" data-panel="projects">
+      <div class="panel"><div class="panel-head"><h3>Project Management</h3></div>
+        <table class="data-table">
+          <thead><tr><th>Project</th><th>Customer</th><th>Progress</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Custom Multirotor UAV</td><td>D. Whitfield</td><td style="width:160px;"><div class="progress-bar"><span style="width:40%;"></span></div></td><td><span class="status-pill status-active">In Progress</span></td></tr>
+            <tr><td>VTOL UAV</td><td>A. Kessler</td><td><div class="progress-bar"><span style="width:70%;"></span></div></td><td><span class="status-pill status-active">In Progress</span></td></tr>
+            <tr><td>FPV Freestyle Build</td><td>M. Laurent</td><td><div class="progress-bar"><span style="width:100%;"></span></div></td><td><span class="status-pill status-done">Completed</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TRAINING -->
+    <div class="admin-panel hidden" data-panel="training">
+      <div class="panel"><div class="panel-head"><h3>Training Registrations</h3></div>
+        <table class="data-table">
+          <thead><tr><th>Student</th><th>Course</th><th>Start Date</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>M. Laurent</td><td>FPV Pilot Course</td><td>2026-09-25</td><td><span class="status-pill status-pending">Confirmed</span></td></tr>
+            <tr><td>J. Alvarez</td><td>RC Aircraft Beginner Course</td><td>2026-09-18</td><td><span class="status-pill status-active">In Progress</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- INQUIRIES -->
+    <div class="admin-panel hidden" data-panel="inquiries">
+      <div class="panel"><div class="panel-head"><h3>Product Inquiries</h3></div>
+        <table class="data-table">
+          <thead><tr><th>Ref</th><th>Customer</th><th>Items</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>INQ-9E12</td><td>R. Okafor</td><td>3 items — Motors, ESCs</td><td><span class="status-pill status-new">New</span></td></tr>
+            <tr><td>INQ-8D04</td><td>S. Nakamura</td><td>1 item — GPS Module</td><td><span class="status-pill status-done">Responded</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- MESSAGES -->
+    <div class="admin-panel hidden" data-panel="messages">
+      <div class="panel"><div class="panel-head"><h3>Contact Messages</h3></div>
+        <table class="data-table">
+          <thead><tr><th>Name</th><th>Subject</th><th>Received</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>K. Fischer</td><td>General Inquiry</td><td>2026-09-15</td><td><span class="status-pill status-new">Unread</span></td></tr>
+            <tr><td>T. Brennan</td><td>Careers</td><td>2026-09-13</td><td><span class="status-pill status-done">Replied</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TEAM -->
+    <div class="admin-panel hidden" data-panel="team">
+      <div class="panel"><div class="panel-head"><h3>Team Management</h3></div>
+        <table class="data-table">
+          <thead><tr><th>Name</th><th>Role</th><th>Status</th></tr></thead>
+          <tbody id="admin-team-rows"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ANALYTICS -->
+    <div class="admin-panel hidden" data-panel="analytics">
+      <div class="grid grid-3">
+        <div class="kpi"><div class="lbl">Sessions (30d)</div><div class="num">—</div><p class="text-muted" style="font-size:.76rem;">Connect analytics provider</p></div>
+        <div class="kpi"><div class="lbl">Quote Conversion</div><div class="num">—</div><p class="text-muted" style="font-size:.76rem;">Connect analytics provider</p></div>
+        <div class="kpi"><div class="lbl">Top Page</div><div class="num" style="font-size:1rem;">Services</div><p class="text-muted" style="font-size:.76rem;">Sample placeholder</p></div>
+      </div>
+      <div class="alert alert-info mt-2">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+        <div>Connect an analytics provider (e.g. a privacy-respecting pageview tracker) to populate this section with real traffic data.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="js/icons.js"></script>
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script src="js/forms.js"></script>
+<script>
+  document.querySelectorAll('[data-i]').forEach(el => el.innerHTML = ABD.icon(el.dataset.i));
+  document.getElementById('brand-mark').innerHTML = ABD.icon('drone');
+
+  document.getElementById('admin-nav').addEventListener('click', e => {
+    const link = e.target.closest('[data-tab]');
+    if(!link) return;
+    e.preventDefault();
+    document.querySelectorAll('#admin-nav a[data-tab]').forEach(a => a.classList.remove('active'));
+    link.classList.add('active');
+    const target = link.dataset.tab;
+    document.querySelectorAll('.admin-panel').forEach(p => p.classList.toggle('hidden', p.dataset.panel !== target));
+  });
+
+  const leads = [
+    { name:"D. Whitfield", source:"Quote Form", interest:"UAV", date:"2026-09-15" },
+    { name:"K. Fischer", source:"Contact Form", interest:"General", date:"2026-09-15" },
+    { name:"R. Okafor", source:"Product Inquiry", interest:"Parts", date:"2026-09-14" },
+    { name:"J. Alvarez", source:"Booking", interest:"Training", date:"2026-09-13" },
+    { name:"T. Brennan", source:"Careers", interest:"Application", date:"2026-09-13" },
+  ];
+  document.getElementById('leads-table').innerHTML = `
+    <thead><tr><th>Name</th><th>Source</th><th>Interest</th><th>Date</th></tr></thead>
+    <tbody>${leads.map(l=>`<tr><td>${l.name}</td><td>${l.source}</td><td>${l.interest}</td><td>${l.date}</td></tr>`).join('')}</tbody>`;
+
+  document.getElementById('admin-team-rows').innerHTML = ABD.team.map(t => `
+    <tr><td>${t.name}</td><td>${t.role}</td><td><span class="status-pill status-active">Active</span></td></tr>`).join('');
+</script>
+</body>
+</html>

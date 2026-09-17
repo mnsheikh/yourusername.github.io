@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /portal-login.html
+Disallow: /portal-dashboard.html
+Disallow: /admin-dashboard.html
+
+Sitemap: https://abdrc.wuaze.com/sitemap.xml

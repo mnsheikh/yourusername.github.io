@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Careers at ABD RC | Join Our Engineering Team</title>
+<meta name="description" content="Explore career opportunities at ABD RC across RC aircraft, UAV engineering, avionics, flight testing and customer support.">
+<link rel="canonical" href="https://abdrc.wuaze.com/careers.html">
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="careers">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="bg-grid"></div><div class="bg-noise"></div>
+<header id="site-header"></header>
+
+<main id="main">
+  <section class="page-header">
+    <div class="container">
+      <div class="breadcrumb"><a href="index.html">Home</a><span class="sep">/</span><span>Careers</span></div>
+      <span class="eyebrow">Careers</span>
+      <h1>Build your career in RC &amp; UAV engineering</h1>
+      <p>We work with people who care about doing precise, well-documented technical work. Open roles are listed below — don't see a fit? Send a general application.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="alert alert-info reveal mb-3">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+        <div>Roles listed below are illustrative examples of positions ABD RC may hire for. Confirm current openings via the application form.</div>
+      </div>
+      <div class="grid" style="gap:16px;" id="careers-list"></div>
+    </div>
+  </section>
+
+  <section class="section-sm" style="background:var(--bg-elevated);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+    <div class="container" style="max-width:680px;">
+      <div class="section-head center reveal">
+        <span class="eyebrow" style="justify-content:center;">Apply</span>
+        <h2>General Application</h2>
+      </div>
+      <div class="panel reveal">
+        <form id="careers-form">
+          <div class="field-row">
+            <div class="field"><label>Full Name <span class="req">*</span></label><input type="text" required></div>
+            <div class="field"><label>Email <span class="req">*</span></label><input type="email" required></div>
+          </div>
+          <div class="field-row">
+            <div class="field"><label>Phone</label><input type="tel"></div>
+            <div class="field"><label>Position of Interest</label>
+              <select id="careers-position">
+                <option>Aircraft Technician</option>
+                <option>UAV Systems Engineer</option>
+                <option>Avionics Engineer</option>
+                <option>Flight Test Engineer</option>
+                <option>Training Instructor</option>
+                <option>Customer Support Agent</option>
+                <option>Other / General Application</option>
+              </select>
+            </div>
+          </div>
+          <div class="field"><label>Relevant Experience</label><textarea placeholder="Summarize your background and relevant experience..."></textarea></div>
+          <div class="field"><label>Portfolio / LinkedIn / Resume Link</label><input type="url" placeholder="https://"></div>
+          <button type="submit" class="btn btn-primary btn-block">Submit Application</button>
+        </form>
+        <div class="success-box hidden">
+          <div class="check"></div>
+          <h3>Application Received</h3>
+          <p>Reference <span class="ref-code"></span> — our team reviews applications on a rolling basis and will reach out if there's a fit.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="site-footer"></footer>
+<div id="float-stack" class="float-stack"></div>
+
+<script src="js/icons.js"></script>
+<script src="js/data.js"></script>
+<script src="js/components.js"></script>
+<script src="js/main.js"></script>
+<script src="js/forms.js"></script>
+<script src="js/chat-widget.js"></script>
+<script>
+  document.querySelector('.success-box .check').innerHTML = ABD.icon('check');
+  const roles = [
+    { t:"Aircraft Technician", type:"Full-time · Workshop", d:"Assembly, repair and maintenance of RC aircraft platforms." },
+    { t:"UAV Systems Engineer", type:"Full-time · Engineering", d:"Autopilot integration, mission systems and UAV platform development." },
+    { t:"Avionics Engineer", type:"Full-time · Engineering", d:"Flight electronics, radio systems and diagnostics." },
+    { t:"Flight Test Engineer", type:"Full-time · Field", d:"Executing and documenting flight-test protocols across platforms." },
+    { t:"Training Instructor", type:"Part-time / Full-time", d:"Delivering RC and UAV training programs to students and operators." },
+    { t:"Customer Support Agent", type:"Full-time · Remote-friendly", d:"Managing quotes, bookings and client communication." },
+  ];
+  document.getElementById('careers-list').innerHTML = roles.map(r => `
+    <div class="svc-row reveal in" style="align-items:center;">
+      <span class="ic" style="width:44px;height:44px;">${ABD.icon('briefcase')}</span>
+      <div style="flex:1;"><h4 style="font-size:1rem;">${r.t}</h4><p class="text-muted" style="font-size:.85rem;">${r.type} — ${r.d}</p></div>
+      <a href="#careers-form" class="btn btn-outline btn-sm" data-role="${r.t}">Apply</a>
+    </div>`).join('');
+  document.getElementById('careers-list').addEventListener('click', e => {
+    const a = e.target.closest('[data-role]'); if(!a) return;
+    document.getElementById('careers-position').value = a.dataset.role;
+  });
+</script>
+</body>
+</html>

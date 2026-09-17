@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parts &amp; Equipment Catalog | Motors, ESCs, Servos &amp; More | ABD RC</title>
+<meta name="description" content="Browse ABD RC's parts and equipment catalog: motors, ESCs, servos, propellers, batteries, radios, flight controllers, FPV equipment, carbon components and tools. Request a price quote.">
+<link rel="canonical" href="https://abdrc.wuaze.com/parts-equipment.html">
+<meta property="og:title" content="Parts & Equipment Catalog | ABD RC">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="products">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="bg-grid"></div><div class="bg-noise"></div>
+<header id="site-header"></header>
+
+<main id="main">
+  <section class="page-header">
+    <div class="container">
+      <div class="breadcrumb"><a href="index.html">Home</a><span class="sep">/</span><span>Parts &amp; Equipment</span></div>
+      <span class="eyebrow">Parts &amp; Equipment</span>
+      <h1>Components we build with — available to you</h1>
+      <p>Motors, ESCs, servos, batteries, radios, flight electronics and fabrication materials. Pricing is confirmed per order — request a price or add items to an inquiry.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="filter-bar" id="product-filters"></div>
+      <div class="grid grid-4" id="product-grid"></div>
+    </div>
+  </section>
+</main>
+
+<footer id="site-footer"></footer>
+<div id="float-stack" class="float-stack"></div>
+
+<!-- Inquiry bar -->
+<button id="inquiry-bar" class="btn btn-primary hidden" style="position:fixed;left:24px;bottom:24px;z-index:1400;border-radius:999px;">
+  <span id="inquiry-count">0</span>&nbsp;items — Review Inquiry
+</button>
+
+<!-- Product detail / inquiry modal -->
+<div class="modal-overlay" id="product-modal">
+  <div class="modal-box">
+    <button class="modal-close" id="product-modal-close" aria-label="Close"></button>
+    <div class="modal-body">
+      <div class="tabs" id="inquiry-tabs" style="display:none;"></div>
+      <div id="product-modal-body"></div>
+    </div>
+  </div>
+</div>
+
+<script src="js/icons.js"></script>
+<script src="js/data.js"></script>
+<script src="js/components.js"></script>
+<script src="js/main.js"></script>
+<script src="js/forms.js"></script>
+<script src="js/chat-widget.js"></script>
+<script>
+document.getElementById('product-modal-close').innerHTML = ABD.icon('close');
+
+const cats = ["All", ...new Set(ABD.products.map(p=>p.cat))];
+document.getElementById('product-filters').innerHTML = cats.map((c,i) => `<button class="filter-btn ${i===0?'active':''}" data-cat="${c}">${c}</button>`).join('');
+
+const stockLabel = { in:"In Stock", low:"Low Stock", out:"Made to Order" };
+const stockClass = { in:"stock-in", low:"stock-low", out:"stock-out" };
+
+let inquiry = [];
+
+function renderProducts(cat){
+  const list = cat === "All" ? ABD.products : ABD.products.filter(p => p.cat === cat);
+  document.getElementById('product-grid').innerHTML = list.map(p => `
+    <div class="product-card reveal in">
+      <div class="product-media">
+        <span class="stock-badge ${stockClass[p.stock]}">${stockLabel[p.stock]}</span>
+        ${ABD.mediaPlaceholder('electronics')}
+      </div>
+      <div class="product-body">
+        <div class="cat">${p.cat}</div>
+        <h4>${p.name}</h4>
+        <ul class="product-specs">${p.specs.map(s=>`<li>• ${s}</li>`).join('')}</ul>
+        <div class="product-foot">
+          <span class="price">Request Price</span>
+          <button class="btn btn-outline btn-sm" data-add="${p.id}">${inquiry.includes(p.id) ? 'Added ✓' : 'Add to Inquiry'}</button>
+        </div>
+        <button class="btn btn-ghost btn-sm btn-block mt-1" data-view="${p.id}">View Details</button>
+      </div>
+    </div>`).join('');
+}
+renderProducts("All");
+
+document.getElementById('product-filters').addEventListener('click', e => {
+  const btn = e.target.closest('.filter-btn');
+  if(!btn) return;
+  document.querySelectorAll('#product-filters .filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderProducts(btn.dataset.cat);
+});
+
+function updateInquiryBar(){
+  const bar = document.getElementById('inquiry-bar');
+  document.getElementById('inquiry-count').textContent = inquiry.length;
+  bar.classList.toggle('hidden', inquiry.length === 0);
+}
+
+document.getElementById('product-grid').addEventListener('click', e => {
+  const addBtn = e.target.closest('[data-add]');
+  const viewBtn = e.target.closest('[data-view]');
+  if(addBtn){
+    const id = addBtn.dataset.add;
+    if(!inquiry.includes(id)){ inquiry.push(id); addBtn.textContent = 'Added ✓'; }
+    updateInquiryBar();
+  }
+  if(viewBtn){
+    const p = ABD.products.find(x => x.id === viewBtn.dataset.view);
+    openProductModal(p);
+  }
+});
+
+function openProductModal(p){
+  document.getElementById('inquiry-tabs').style.display = 'none';
+  document.getElementById('product-modal-body').innerHTML = `
+    <div class="blueprint-frame mb-2"><div class="inner">${ABD.mediaPlaceholder('electronics')}</div></div>
+    <span class="tag">${p.cat}</span>
+    <h2 class="mt-1">${p.name}</h2>
+    <table class="spec-table mt-2">${p.specs.map(s=>`<tr><td>Spec</td><td>${s}</td></tr>`).join('')}</table>
+    <p class="text-muted mt-2">Pricing confirmed per order based on quantity and shipping destination. Add this item to your inquiry to request a quote.</p>
+    <button class="btn btn-primary btn-block mt-2" data-add="${p.id}">Add to Inquiry</button>
+  `;
+  document.getElementById('product-modal-body').querySelector('button[data-add]').addEventListener('click', () => {
+    if(!inquiry.includes(p.id)) inquiry.push(p.id);
+    updateInquiryBar();
+    closeProductModal();
+  });
+  document.getElementById('product-modal').classList.add('open');
+}
+function closeProductModal(){ document.getElementById('product-modal').classList.remove('open'); }
+document.getElementById('product-modal-close').addEventListener('click', closeProductModal);
+document.getElementById('product-modal').addEventListener('click', e => { if(e.target.id==='product-modal') closeProductModal(); });
+
+document.getElementById('inquiry-bar').addEventListener('click', () => {
+  const items = ABD.products.filter(p => inquiry.includes(p.id));
+  document.getElementById('product-modal-body').innerHTML = `
+    <h2>Your Parts Inquiry</h2>
+    <p class="text-muted mt-1">Review selected items, then submit — our parts team will follow up with pricing and availability.</p>
+    <div class="mt-2" style="display:flex;flex-direction:column;gap:8px;">
+      ${items.map(i => `<div class="flex justify-between items-center" style="border:1px solid var(--border);padding:10px 14px;border-radius:10px;"><span>${i.name}</span><span class="text-muted" style="font-size:.78rem;">${i.cat}</span></div>`).join('') || '<p class="text-muted">No items added yet.</p>'}
+    </div>
+    <form id="product-inquiry-form" class="mt-3" data-success-target="inquiry-success">
+      <div class="field-row">
+        <div class="field"><label>Full Name <span class="req">*</span></label><input type="text" required></div>
+        <div class="field"><label>Email <span class="req">*</span></label><input type="email" required></div>
+      </div>
+      <div class="field"><label>Notes</label><textarea placeholder="Quantities, shipping destination, timeline..."></textarea></div>
+      <button type="submit" class="btn btn-primary btn-block">Submit Inquiry</button>
+    </form>
+    <div class="success-box hidden" id="inquiry-success">
+      <div class="check">${ABD.icon('check')}</div>
+      <h3>Inquiry Received</h3>
+      <p>Reference: <span class="ref-code"></span> — our parts team will email pricing and availability shortly.</p>
+      <button class="btn btn-outline" onclick="closeProductModal()">Close</button>
+    </div>
+  `;
+  document.getElementById('product-modal').classList.add('open');
+  document.getElementById('product-inquiry-form').addEventListener('submit', e => {
+    e.preventDefault();
+    const form = e.target;
+    const btn = form.querySelector('[type="submit"]');
+    btn.textContent = 'Submitting...'; btn.disabled = true;
+    setTimeout(() => {
+      form.style.display = 'none';
+      const box = document.getElementById('inquiry-success');
+      box.classList.remove('hidden');
+      box.querySelector('.ref-code').textContent = 'INQ-' + Math.random().toString(36).slice(2,6).toUpperCase();
+      inquiry = []; updateInquiryBar();
+    }, 800);
+  });
+});
+</script>
+</body>
+</html>

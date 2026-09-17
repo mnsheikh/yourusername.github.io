@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Customer Portal Login | ABD RC</title>
+<meta name="description" content="Log in to the ABD RC customer portal to track quotes, repairs, projects and appointments.">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="portal">
+<div class="bg-grid"></div><div class="bg-noise"></div>
+<div class="auth-shell">
+  <div class="auth-box reveal in">
+    <a href="index.html" class="brand"><span class="brand-mark" id="brand-mark"></span><span><span>ABD RC</span></span></a>
+    <h2>Customer Portal</h2>
+    <p>Track your quotes, repairs, projects and appointments.</p>
+
+    <div class="tabs" id="auth-tabs" data-tabs="auth" style="border:none;justify-content:center;margin-bottom:20px;">
+      <button class="tab-btn active" data-tab="login">Log In</button>
+      <button class="tab-btn" data-tab="signup">Create Account</button>
+    </div>
+
+    <div class="tab-panel active" data-group="auth" data-tab="login">
+      <form id="portal-login-form" data-success-target="login-success">
+        <div class="field"><label>Email <span class="req">*</span></label><input type="email" required placeholder="you@email.com"></div>
+        <div class="field"><label>Password <span class="req">*</span></label><input type="password" required placeholder="••••••••"></div>
+        <button type="submit" class="btn btn-primary btn-block">Log In</button>
+      </form>
+      <div class="success-box hidden" id="login-success">
+        <div class="check"></div>
+        <h3>Welcome back</h3>
+        <p>This is a demo login — no real authentication is connected.</p>
+        <a href="portal-dashboard.html" class="btn btn-primary btn-block mt-2">Enter Dashboard</a>
+      </div>
+    </div>
+
+    <div class="tab-panel" data-group="auth" data-tab="signup">
+      <form id="portal-signup-form">
+        <div class="field"><label>Full Name <span class="req">*</span></label><input type="text" required></div>
+        <div class="field"><label>Email <span class="req">*</span></label><input type="email" required></div>
+        <div class="field"><label>Password <span class="req">*</span></label><input type="password" required></div>
+        <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+      </form>
+    </div>
+
+    <div class="auth-divider">Demo Interface</div>
+    <p class="text-muted" style="text-align:center;font-size:.8rem;">This portal uses mock data for demonstration. Connect a real authentication backend before production use.</p>
+    <div class="center-col mt-2"><a href="index.html" style="font-size:.85rem;color:var(--accent);">← Back to homepage</a></div>
+  </div>
+</div>
+
+<script src="js/icons.js"></script>
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script src="js/forms.js"></script>
+<script>
+  document.getElementById('brand-mark').innerHTML = ABD.icon('drone');
+  document.querySelector('#login-success .check').innerHTML = ABD.icon('check');
+  document.getElementById('portal-signup-form').addEventListener('submit', e => {
+    e.preventDefault();
+    window.location.href = 'portal-dashboard.html';
+  });
+</script>
+</body>
+</html>

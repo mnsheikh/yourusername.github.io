@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Customer Portal | ABD RC</title>
+<meta name="description" content="ABD RC customer portal — track projects, repairs, quotes, appointments and documents.">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="portal">
+<div class="demo-banner">DEMO INTERFACE — populated with mock data. Connect a real backend to make this portal live.</div>
+<div class="dash-shell">
+  <aside class="dash-sidebar">
+    <a href="index.html" class="brand"><span class="brand-mark" id="brand-mark"></span><span><span>ABD RC</span><small>Customer Portal</small></span></a>
+    <nav class="dash-nav" id="portal-nav">
+      <div class="grp">Overview</div>
+      <a href="#" data-tab="overview" class="active"><span data-i="grid"></span> Dashboard</a>
+      <div class="grp">My Activity</div>
+      <a href="#" data-tab="projects"><span data-i="layers"></span> My Projects</a>
+      <a href="#" data-tab="repairs"><span data-i="tool"></span> My Repairs</a>
+      <a href="#" data-tab="quotes"><span data-i="file"></span> My Quotes</a>
+      <a href="#" data-tab="appointments"><span data-i="calendar"></span> My Appointments</a>
+      <a href="#" data-tab="documents"><span data-i="folder"></span> Documents</a>
+      <div class="grp">Account</div>
+      <a href="#" data-tab="support"><span data-i="message"></span> Support</a>
+      <a href="portal-login.html"><span data-i="logout"></span> Log Out</a>
+    </nav>
+  </aside>
+
+  <div class="dash-main">
+    <div class="dash-topbar">
+      <div><h1 style="font-size:1.5rem;">Welcome back, [Customer Name]</h1><p class="text-muted" style="font-size:.86rem;">Here's what's happening with your projects.</p></div>
+      <div class="flex gap-1">
+        <a href="quote.html" class="btn btn-primary btn-sm">New Quote Request</a>
+        <a href="book-service.html" class="btn btn-outline btn-sm">Book a Service</a>
+      </div>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div class="portal-panel" data-panel="overview">
+      <div class="dash-kpis">
+        <div class="kpi"><div class="top"><span class="ic" data-i="layers"></span><span class="delta up">Active</span></div><div class="num">3</div><div class="lbl">Active Projects</div></div>
+        <div class="kpi"><div class="top"><span class="ic" data-i="tool"></span><span class="delta">Pending</span></div><div class="num">1</div><div class="lbl">Repairs In Progress</div></div>
+        <div class="kpi"><div class="top"><span class="ic" data-i="file"></span><span class="delta up">New</span></div><div class="num">2</div><div class="lbl">Open Quotes</div></div>
+        <div class="kpi"><div class="top"><span class="ic" data-i="calendar"></span><span class="delta">Upcoming</span></div><div class="num">1</div><div class="lbl">Appointments</div></div>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h3>Recent Activity</h3></div>
+        <table class="data-table">
+          <thead><tr><th>Date</th><th>Activity</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>2026-09-12</td><td>Quote submitted — Custom Multirotor UAV</td><td><span class="status-pill status-new">New</span></td></tr>
+            <tr><td>2026-09-08</td><td>Repair booked — Wing damage, Trainer Aircraft</td><td><span class="status-pill status-active">In Progress</span></td></tr>
+            <tr><td>2026-08-29</td><td>Project milestone — FPV Freestyle Build</td><td><span class="status-pill status-done">Completed</span></td></tr>
+            <tr><td>2026-08-20</td><td>Training booked — FPV Pilot Course</td><td><span class="status-pill status-pending">Pending</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- PROJECTS -->
+    <div class="portal-panel hidden" data-panel="projects">
+      <div class="panel">
+        <div class="panel-head"><h3>My Projects</h3></div>
+        <table class="data-table">
+          <thead><tr><th>Project</th><th>Service</th><th>Progress</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Custom Multirotor UAV</td><td>UAV</td><td style="width:160px;"><div class="progress-bar"><span style="width:40%;"></span></div></td><td><span class="status-pill status-active">In Progress</span></td></tr>
+            <tr><td>FPV Freestyle Build</td><td>FPV</td><td><div class="progress-bar"><span style="width:100%;"></span></div></td><td><span class="status-pill status-done">Completed</span></td></tr>
+            <tr><td>Trainer Aircraft Refurbishment</td><td>RC Aircraft</td><td><div class="progress-bar"><span style="width:15%;"></span></div></td><td><span class="status-pill status-pending">Awaiting Parts</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- REPAIRS -->
+    <div class="portal-panel hidden" data-panel="repairs">
+      <div class="panel">
+        <div class="panel-head"><h3>My Repairs</h3><a href="book-service.html" class="btn btn-outline btn-sm">Book a Repair</a></div>
+        <table class="data-table">
+          <thead><tr><th>Reference</th><th>Item</th><th>Issue</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>BKG-8823</td><td>Trainer Aircraft</td><td>Wing damage</td><td><span class="status-pill status-active">In Progress</span></td></tr>
+            <tr><td>BKG-7710</td><td>FPV Quad</td><td>ESC replacement</td><td><span class="status-pill status-done">Completed</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- QUOTES -->
+    <div class="portal-panel hidden" data-panel="quotes">
+      <div class="panel">
+        <div class="panel-head"><h3>My Quotes</h3><a href="quote.html" class="btn btn-outline btn-sm">Request New Quote</a></div>
+        <table class="data-table">
+          <thead><tr><th>Reference</th><th>Service</th><th>Submitted</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>PRJ-4F21</td><td>UAV — Custom Multirotor</td><td>2026-09-12</td><td><span class="status-pill status-new">Under Review</span></td></tr>
+            <tr><td>PRJ-2A09</td><td>Manufacturing — CNC Brackets</td><td>2026-08-30</td><td><span class="status-pill status-done">Quoted</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- APPOINTMENTS -->
+    <div class="portal-panel hidden" data-panel="appointments">
+      <div class="panel">
+        <div class="panel-head"><h3>My Appointments</h3><a href="book-service.html" class="btn btn-outline btn-sm">Book Appointment</a></div>
+        <table class="data-table">
+          <thead><tr><th>Service</th><th>Date</th><th>Time</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>FPV Pilot Course — Session 1</td><td>2026-09-25</td><td>10:00</td><td><span class="status-pill status-pending">Confirmed</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- DOCUMENTS -->
+    <div class="portal-panel hidden" data-panel="documents">
+      <div class="panel">
+        <div class="panel-head"><h3>Documents</h3><button class="btn btn-outline btn-sm" id="doc-upload-btn">Upload Document</button></div>
+        <table class="data-table">
+          <thead><tr><th>File</th><th>Related To</th><th>Uploaded</th><th></th></tr></thead>
+          <tbody>
+            <tr><td>UAV_payload_spec.pdf</td><td>PRJ-4F21</td><td>2026-09-12</td><td><span class="text-muted" style="font-size:.78rem;">Download (demo)</span></td></tr>
+            <tr><td>flight_test_report.pdf</td><td>FPV Freestyle Build</td><td>2026-08-29</td><td><span class="text-muted" style="font-size:.78rem;">Download (demo)</span></td></tr>
+            <tr><td>invoice_BKG-7710.pdf</td><td>BKG-7710</td><td>2026-08-05</td><td><span class="text-muted" style="font-size:.78rem;">Download (demo)</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- SUPPORT -->
+    <div class="portal-panel hidden" data-panel="support">
+      <div class="panel" style="max-width:560px;">
+        <div class="panel-head"><h3>Contact Support</h3></div>
+        <form id="portal-support-form">
+          <div class="field"><label>Subject</label><input type="text" placeholder="What do you need help with?"></div>
+          <div class="field"><label>Message</label><textarea placeholder="Describe your issue..."></textarea></div>
+          <button type="submit" class="btn btn-primary btn-block">Send to Support</button>
+        </form>
+        <div class="success-box hidden"><div class="check"></div><h3>Support Ticket Created</h3><p>Reference <span class="ref-code"></span></p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/icons.js"></script>
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script src="js/forms.js"></script>
+<script>
+  document.querySelectorAll('[data-i]').forEach(el => el.innerHTML = ABD.icon(el.dataset.i));
+  document.getElementById('brand-mark').innerHTML = ABD.icon('drone');
+
+  document.getElementById('portal-nav').addEventListener('click', e => {
+    const link = e.target.closest('[data-tab]');
+    if(!link) return;
+    e.preventDefault();
+    document.querySelectorAll('#portal-nav a[data-tab]').forEach(a => a.classList.remove('active'));
+    link.classList.add('active');
+    const target = link.dataset.tab;
+    document.querySelectorAll('.portal-panel').forEach(p => p.classList.toggle('hidden', p.dataset.panel !== target));
+  });
+
+  document.getElementById('portal-support-form').addEventListener('submit', e => {
+    e.preventDefault();
+    const form = e.target, btn = form.querySelector('button');
+    btn.textContent = 'Sending...'; btn.disabled = true;
+    setTimeout(() => {
+      form.style.display = 'none';
+      const box = form.nextElementSibling;
+      box.classList.remove('hidden');
+      box.querySelector('.check').innerHTML = ABD.icon('check');
+      box.querySelector('.ref-code').textContent = 'SUP-' + Math.random().toString(36).slice(2,6).toUpperCase();
+    }, 700);
+  });
+</script>
+</body>
+</html>

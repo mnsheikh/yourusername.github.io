@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Knowledge Center | RC &amp; UAV Articles | ABD RC</title>
+<meta name="description" content="RC and UAV engineering articles: motor and propeller selection, LiPo battery safety, CG setup, pre-flight inspection, FPV setup, autopilot basics and troubleshooting guides.">
+<link rel="canonical" href="https://abdrc.wuaze.com/blog.html">
+<meta property="og:title" content="Knowledge Center | ABD RC">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="blog">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="bg-grid"></div><div class="bg-noise"></div>
+<header id="site-header"></header>
+
+<main id="main">
+  <section class="page-header">
+    <div class="container">
+      <div class="breadcrumb"><a href="index.html">Home</a><span class="sep">/</span><span>Knowledge Center</span></div>
+      <span class="eyebrow">Knowledge Center</span>
+      <h1>Engineering notes, written for pilots</h1>
+      <p>Practical guides on components, setup and maintenance — the same knowledge our engineers apply to every build.</p>
+      <div class="search-box mt-2">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input id="blog-search" placeholder="Search articles..." autocomplete="off">
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="filter-bar" id="blog-filters"></div>
+      <div class="grid grid-3" id="blog-grid"></div>
+    </div>
+  </section>
+</main>
+
+<footer id="site-footer"></footer>
+<div id="float-stack" class="float-stack"></div>
+
+<script src="js/icons.js"></script>
+<script src="js/data.js"></script>
+<script src="js/components.js"></script>
+<script src="js/main.js"></script>
+<script src="js/forms.js"></script>
+<script src="js/chat-widget.js"></script>
+<script>
+const cats = ["All", ...new Set(ABD.blog.map(b=>b.category))];
+document.getElementById('blog-filters').innerHTML = cats.map((c,i)=>`<button class="filter-btn ${i===0?'active':''}" data-cat="${c}">${c}</button>`).join('');
+
+let activeCat = "All", q = "";
+function renderBlog(){
+  let list = activeCat==="All" ? ABD.blog : ABD.blog.filter(b=>b.category===activeCat);
+  if(q) list = list.filter(b => (b.title+b.excerpt).toLowerCase().includes(q.toLowerCase()));
+  document.getElementById('blog-grid').innerHTML = list.length ? list.map(b => `
+    <a class="blog-card reveal in" href="blog-article.html?slug=${b.slug}">
+      <div class="blog-media">${ABD.mediaPlaceholder('file')}</div>
+      <div class="blog-body">
+        <div class="blog-meta"><span>${b.category}</span><span>·</span><span>${b.readTime}</span></div>
+        <h3>${b.title}</h3>
+        <p>${b.excerpt}</p>
+      </div>
+    </a>`).join('') : '<p class="text-muted">No articles match your search.</p>';
+}
+renderBlog();
+document.getElementById('blog-filters').addEventListener('click', e=>{
+  const btn = e.target.closest('.filter-btn'); if(!btn) return;
+  document.querySelectorAll('#blog-filters .filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active'); activeCat = btn.dataset.cat; renderBlog();
+});
+document.getElementById('blog-search').addEventListener('input', e => { q = e.target.value; renderBlog(); });
+</script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="doc-title">Article | ABD RC Knowledge Center</title>
+<meta id="doc-desc" name="description" content="RC and UAV engineering article from the ABD RC Knowledge Center.">
+<link rel="canonical" href="https://abdrc.wuaze.com/blog-article.html">
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="blog">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="bg-grid"></div><div class="bg-noise"></div>
+<header id="site-header"></header>
+
+<main id="main">
+  <section class="page-header">
+    <div class="container">
+      <div class="breadcrumb"><a href="index.html">Home</a><span class="sep">/</span><a href="blog.html">Knowledge Center</a><span class="sep">/</span><span id="crumb-title">Article</span></div>
+      <div class="blog-meta mb-1" id="article-meta"></div>
+      <h1 id="article-title" style="max-width:840px;"></h1>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="blueprint-frame mb-3" style="max-width:840px;margin-inline:auto;">
+        <div class="inner" id="article-media"></div>
+      </div>
+      <div class="article-body" id="article-body"></div>
+
+      <div class="divider" style="max-width:74ch;margin-inline:auto;"></div>
+
+      <div class="center-col">
+        <span class="eyebrow" style="justify-content:center;">Need this applied to your build?</span>
+        <h3 class="mt-1">Talk to an engineer about your project</h3>
+        <div class="btn-group mt-2" style="justify-content:center;">
+          <a href="quote.html" class="btn btn-primary">Request a Quote</a>
+          <a href="contact.html" class="btn btn-outline">Contact Us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-sm" style="background:var(--bg-elevated);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+    <div class="container">
+      <div class="section-head center reveal">
+        <span class="eyebrow" style="justify-content:center;">Related Reading</span>
+        <h2>More from the Knowledge Center</h2>
+      </div>
+      <div class="grid grid-3" id="related-articles"></div>
+    </div>
+  </section>
+</main>
+
+<footer id="site-footer"></footer>
+<div id="float-stack" class="float-stack"></div>
+
+<script src="js/icons.js"></script>
+<script src="js/data.js"></script>
+<script src="js/components.js"></script>
+<script src="js/main.js"></script>
+<script src="js/forms.js"></script>
+<script src="js/chat-widget.js"></script>
+<script>
+const params = new URLSearchParams(location.search);
+const slug = params.get('slug') || ABD.blog[0].slug;
+const article = ABD.blog.find(b => b.slug === slug) || ABD.blog[0];
+
+document.title = article.title + " | ABD RC Knowledge Center";
+document.getElementById('doc-title').textContent = document.title;
+document.getElementById('doc-desc').setAttribute('content', article.excerpt);
+document.getElementById('crumb-title').textContent = article.title;
+document.getElementById('article-title').textContent = article.title;
+document.getElementById('article-meta').innerHTML = `<span>${article.category}</span><span>·</span><span>${new Date(article.date).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}</span><span>·</span><span>${article.readTime}</span>`;
+document.getElementById('article-media').innerHTML = ABD.mediaPlaceholder('file');
+document.getElementById('article-body').innerHTML = article.body.map(p => `<p>${p}</p>`).join('');
+
+document.getElementById('related-articles').innerHTML = ABD.blog.filter(b => b.slug !== article.slug && b.category === article.category).concat(ABD.blog.filter(b=>b.slug!==article.slug)).slice(0,3).map(b => `
+  <a class="blog-card reveal in" href="blog-article.html?slug=${b.slug}">
+    <div class="blog-media">${ABD.mediaPlaceholder('file')}</div>
+    <div class="blog-body">
+      <div class="blog-meta"><span>${b.category}</span><span>·</span><span>${b.readTime}</span></div>
+      <h3>${b.title}</h3>
+      <p>${b.excerpt}</p>
+    </div>
+  </a>`).join('');
+</script>
+</body>
+</html>

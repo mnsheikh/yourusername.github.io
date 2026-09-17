@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects &amp; Portfolio | Custom RC &amp; UAV Builds | ABD RC</title>
+<meta name="description" content="Explore ABD RC's project portfolio: custom fixed-wing aircraft, electric gliders, FPV aircraft, custom UAVs, VTOL platforms, RC helicopters and CNC-manufactured components.">
+<link rel="canonical" href="https://abdrc.wuaze.com/projects.html">
+<meta property="og:title" content="Projects & Portfolio | ABD RC">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="projects">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="bg-grid"></div><div class="bg-noise"></div>
+<header id="site-header"></header>
+
+<main id="main">
+  <section class="page-header">
+    <div class="container">
+      <div class="breadcrumb"><a href="index.html">Home</a><span class="sep">/</span><span>Projects</span></div>
+      <span class="eyebrow">Portfolio</span>
+      <h1>Engineering, verified in flight</h1>
+      <p>A selection of custom builds across RC aircraft, UAV platforms, FPV, helicopters, RC vehicles and precision manufacturing.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="filter-bar" id="project-filters"></div>
+      <div class="grid grid-3" id="projects-grid"></div>
+    </div>
+  </section>
+</main>
+
+<footer id="site-footer"></footer>
+<div id="float-stack" class="float-stack"></div>
+
+<div class="modal-overlay" id="project-modal">
+  <div class="modal-box">
+    <button class="modal-close" id="project-modal-close" aria-label="Close"></button>
+    <div class="modal-media" id="project-modal-media"></div>
+    <div class="modal-body" id="project-modal-body"></div>
+  </div>
+</div>
+
+<script src="js/icons.js"></script>
+<script src="js/data.js"></script>
+<script src="js/components.js"></script>
+<script src="js/main.js"></script>
+<script src="js/forms.js"></script>
+<script src="js/chat-widget.js"></script>
+<script>
+document.getElementById('project-modal-close').innerHTML = ABD.icon('close');
+
+const catIcon = { "RC Aircraft":"plane", "UAV":"drone", "FPV":"fpv", "Helicopter":"heli", "RC Car":"car", "Manufacturing":"manufacturing" };
+const pCats = ["All", ...new Set(ABD.projects.map(p=>p.category))];
+document.getElementById('project-filters').innerHTML = pCats.map((c,i)=>`<button class="filter-btn ${i===0?'active':''}" data-cat="${c}">${c}</button>`).join('');
+
+function renderProjects(cat){
+  const list = cat==="All" ? ABD.projects : ABD.projects.filter(p=>p.category===cat);
+  document.getElementById('projects-grid').innerHTML = list.map(p => `
+    <div class="project-card reveal in" id="${p.slug}">
+      <div class="project-media">${ABD.mediaPlaceholder(catIcon[p.category]||'plane')}</div>
+      <div class="project-body">
+        <span class="tag">${p.category}</span>
+        <h3>${p.name}</h3>
+        <p class="text-muted">${p.challenge}</p>
+        <div class="project-meta">
+          ${Object.entries(p.specs).slice(0,2).map(([k,v])=>`<div><b>${v}</b>${k}</div>`).join('')}
+        </div>
+        <button class="btn btn-outline btn-block mt-2" data-project="${p.id}">View Project</button>
+      </div>
+    </div>`).join('');
+}
+renderProjects("All");
+
+document.getElementById('project-filters').addEventListener('click', e=>{
+  const btn = e.target.closest('.filter-btn'); if(!btn) return;
+  document.querySelectorAll('#project-filters .filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderProjects(btn.dataset.cat);
+});
+
+document.getElementById('projects-grid').addEventListener('click', e => {
+  const btn = e.target.closest('[data-project]'); if(!btn) return;
+  const p = ABD.projects.find(x=>x.id===btn.dataset.project);
+  document.getElementById('project-modal-media').innerHTML = ABD.mediaPlaceholder(catIcon[p.category]||'plane');
+  document.getElementById('project-modal-body').innerHTML = `
+    <span class="tag">${p.category}</span>
+    <h2 class="mt-1">${p.name}</h2>
+    <div class="grid grid-2 mt-2">
+      <div><h4 class="mb-1">Challenge</h4><p class="text-muted">${p.challenge}</p></div>
+      <div><h4 class="mb-1">Solution</h4><p class="text-muted">${p.solution}</p></div>
+    </div>
+    <h4 class="mt-2 mb-1">Specifications</h4>
+    <table class="spec-table">${Object.entries(p.specs).map(([k,v])=>`<tr><td>${k}</td><td>${v}</td></tr>`).join('')}</table>
+    <h4 class="mt-2 mb-1">Technologies Used</h4>
+    <div class="pill-list">${p.tech.map(t=>`<span class="tag tag-muted">${t}</span>`).join('')}</div>
+    <h4 class="mt-2 mb-1">Results</h4>
+    <p class="text-muted">${p.results}</p>
+    <div class="btn-group mt-3">
+      <a href="quote.html" class="btn btn-primary">Start a Similar Project</a>
+    </div>`;
+  document.getElementById('project-modal').classList.add('open');
+});
+document.getElementById('project-modal-close').addEventListener('click', ()=>document.getElementById('project-modal').classList.remove('open'));
+document.getElementById('project-modal').addEventListener('click', e=>{ if(e.target.id==='project-modal') e.currentTarget.classList.remove('open'); });
+
+/* Open via #hash from other pages (e.g. index.html#slug) */
+window.addEventListener('load', () => {
+  const hash = location.hash.replace('#','');
+  if(hash){ const btn = document.querySelector(`#${hash} [data-project]`); btn?.click(); }
+});
+</script>
+</body>
+</html>

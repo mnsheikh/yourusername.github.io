@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book a Service | ABD RC</title>
+<meta name="description" content="Book a repair, maintenance visit, training session or engineering consultation with ABD RC.">
+<link rel="canonical" href="https://abdrc.wuaze.com/book-service.html">
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="book-service">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="bg-grid"></div><div class="bg-noise"></div>
+<header id="site-header"></header>
+
+<main id="main">
+  <section class="page-header">
+    <div class="container">
+      <div class="breadcrumb"><a href="index.html">Home</a><span class="sep">/</span><span>Book a Service</span></div>
+      <span class="eyebrow">Appointments</span>
+      <h1>Book a Service</h1>
+      <p>Schedule a repair, maintenance visit, training session or consultation. We'll confirm your appointment by email or phone.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="max-width:680px;">
+      <div class="panel">
+        <form id="booking-form">
+          <div class="field"><label>Service <span class="req">*</span></label>
+            <select id="booking-service" required>
+              <option value="">Select a service</option>
+              <option>RC Aircraft Assembly &amp; Setup</option>
+              <option>UAV Integration &amp; Testing</option>
+              <option>FPV Build &amp; Tuning</option>
+              <option>Helicopter Setup &amp; Repair</option>
+              <option>RC Car Tuning &amp; Repair</option>
+              <option>Repair &amp; Maintenance</option>
+              <option>Electronics &amp; Avionics Diagnostics</option>
+              <option>Flight Testing</option>
+              <option>RC Aircraft Beginner Course</option>
+              <option>Advanced RC Aircraft Course</option>
+              <option>FPV Pilot Course</option>
+              <option>UAV Operator Course</option>
+              <option>Consultancy Session</option>
+            </select>
+          </div>
+          <div class="field-row">
+            <div class="field"><label>Preferred Date <span class="req">*</span></label><input type="date" required></div>
+            <div class="field"><label>Preferred Time <span class="req">*</span></label><input type="time" required></div>
+          </div>
+          <div class="field"><label>Location <span class="req">*</span></label>
+            <div class="radio-grid" style="grid-template-columns:repeat(3,1fr);">
+              <label class="radio-card"><input type="radio" name="loc" required value="Workshop"><span>Workshop Drop-off</span></label>
+              <label class="radio-card"><input type="radio" name="loc" value="On-site"><span>On-site Visit</span></label>
+              <label class="radio-card"><input type="radio" name="loc" value="Remote"><span>Remote / Online</span></label>
+            </div>
+          </div>
+          <div class="field"><label>Description</label><textarea placeholder="Tell us what you need — issue details, aircraft type, goals..." id="booking-desc"></textarea></div>
+          <div class="field-row">
+            <div class="field"><label>Full Name <span class="req">*</span></label><input type="text" required></div>
+            <div class="field"><label>Email <span class="req">*</span></label><input type="email" required></div>
+          </div>
+          <div class="field"><label>Phone <span class="req">*</span></label><input type="tel" required></div>
+          <button type="submit" class="btn btn-primary btn-block">Submit Booking Request</button>
+        </form>
+        <div class="success-box hidden">
+          <div class="check"></div>
+          <h3>Service Request Received</h3>
+          <p>Reference <span class="ref-code"></span> — we'll confirm your appointment time by email or phone within one business day.</p>
+          <div class="btn-group mt-3" style="justify-content:center;">
+            <a href="index.html" class="btn btn-outline">Return Home</a>
+            <a href="portal-login.html" class="btn btn-outline">View in Customer Portal</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="site-footer"></footer>
+<div id="float-stack" class="float-stack"></div>
+
+<script src="js/icons.js"></script>
+<script src="js/data.js"></script>
+<script src="js/components.js"></script>
+<script src="js/main.js"></script>
+<script src="js/forms.js"></script>
+<script src="js/chat-widget.js"></script>
+<script>
+  document.querySelector('.success-box .check').innerHTML = ABD.icon('check');
+  const params = new URLSearchParams(location.search);
+  const course = params.get('course');
+  const courseMap = { beginner:"RC Aircraft Beginner Course", advanced:"Advanced RC Aircraft Course", fpv:"FPV Pilot Course", uav:"UAV Operator Course" };
+  if(course && courseMap[course]){
+    const sel = document.getElementById('booking-service');
+    sel.value = courseMap[course];
+    document.getElementById('booking-desc').placeholder = `Requesting a seat in: ${courseMap[course]}`;
+  }
+</script>
+</body>
+</html>
